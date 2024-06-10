@@ -1,0 +1,9 @@
+{"templates": [
+  {
+    "type": "placeholder",
+    "id": 1,
+    "astext": "placeholder with ans = _int1_ + _int2_",
+    "fields": ["_int_", "_int2_"],
+    "keymethod": "placeholderSolve"
+  }
+]}
