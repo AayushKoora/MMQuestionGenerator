@@ -2,8 +2,8 @@
   {
     "type": "placeholder",
     "id": 1,
-    "astext": "placeholder with ans = _int1_ + _int2_",
-    "fields": ["_int_", "_int2_"],
+    "astext": "Placeholder with answer = _int:1-5_ + _int:6-10_",
+    "fields": ["_int:1-5_", "_int:6-10_"],
     "keymethod": "placeholderSolve"
   }
 ]}
