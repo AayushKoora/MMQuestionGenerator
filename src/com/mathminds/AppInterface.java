@@ -6,6 +6,8 @@ import org.json.simple.parser.JSONParser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,14 +18,12 @@ public class AppInterface {
     int width;
     int height;
 
+    Color bgColor;
+
     JFrame frame;
-
-    JPanel headerPanel;
-    JPanel questionPanel;
-    JPanel testPanel;
-
-    JScrollPane questionScrollPane;
-    JScrollPane templateScrollPane;
+    JPanel appPanel;
+    JButton genTest;
+    JTextField testNameField;
 
     ArrayList<TemplateQuestion> templateQuestions;
 
@@ -32,6 +32,9 @@ public class AppInterface {
     public AppInterface() {
         width = Toolkit.getDefaultToolkit().getScreenSize().width;
         height = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+        bgColor = new Color(200, 200, 200);
+
 
         frame = new JFrame("TopLevelDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +58,7 @@ public class AppInterface {
                 JSONArray fieldArr = (JSONArray) templateVal.get("fields");
                 fields.addAll(fieldArr);
 
-                templateQuestions.add(new TemplateQuestion(type, id, asText, fields, keyMethod));
+                templateQuestions.add(new TemplateQuestion(type, Integer.parseInt(id), asText, fields, keyMethod));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -63,34 +66,37 @@ public class AppInterface {
     }
 
 
-    private void createHeaderPanel() {
-        headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setPreferredSize(new Dimension(width, (int) (height * 0.1)));
-        headerPanel.setBackground(Color.red);
-        frame.getContentPane().add(headerPanel, BorderLayout.NORTH);
+
+    private void buildInterface() {
+        appPanel = new JPanel(new GridBagLayout());
+        appPanel.setBackground(bgColor);
+        frame.getContentPane().add(appPanel, BorderLayout.CENTER);
+
+        testNameField = new JTextField(20);
+        testNameField.setToolTipText("Set resulting test name");
+        appPanel.add(testNameField);
+
+        genTest = new JButton();
+        genTest.addActionListener(e -> {
+            //button that happens when you generate a test
+            TestContainer test = genTest(testNameField.getText());
+            CreateOutput createOutput = new CreateOutput(test);
+            //createOutput.pdf();
+            System.out.println(createOutput.string());
+        });
+        genTest.setText("Generate Test");
+        appPanel.add(genTest);
     }
 
-    private void createQuestionPanel() {
-        questionPanel = new JPanel(new BorderLayout());
-        questionPanel.setPreferredSize(new Dimension(width, (int) (height * 0.55)));
-        questionPanel.setBackground(Color.GREEN);
 
-        questionScrollPane = new JScrollPane(questionPanel);
-        questionScrollPane.setPreferredSize(new Dimension((int) (width * 0.35), questionPanel.getHeight()));
-        questionScrollPane.setBackground(Color.CYAN);
 
-        templateScrollPane = new JScrollPane(questionPanel);
-        templateScrollPane.setPreferredSize(new Dimension((int) (width * 0.35), questionPanel.getHeight()));
-        templateScrollPane.setBackground(Color.MAGENTA);
 
-        frame.getContentPane().add(questionPanel, BorderLayout.CENTER);
-    }
-
-    private void createTestPanel() {
-        testPanel = new JPanel(new BorderLayout());
-        testPanel.setPreferredSize(new Dimension(width, (int) (height * 0.35)));
-        testPanel.setBackground(Color.BLUE);
-        frame.getContentPane().add(testPanel, BorderLayout.SOUTH);
+    private TestContainer genTest(String testTitle) {
+        System.out.println("Generating test with title: " + testTitle);
+        TestContainer test = new TestContainer(testTitle, Math.min(templateQuestions.size(), 20), true, templateQuestions);
+        test.populateQuestions();
+        test.randomizeQuestionFields();
+        return test;
     }
 
 
@@ -98,9 +104,7 @@ public class AppInterface {
     public static void main(String[] args) {
         System.out.println("booting first screen.");
         AppInterface screen = new AppInterface();
-        screen.createHeaderPanel();
-        screen.createQuestionPanel();
-        screen.createTestPanel();
+        screen.buildInterface();
 
         //display window
         screen.frame.pack();

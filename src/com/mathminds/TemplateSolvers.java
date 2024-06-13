@@ -2,6 +2,7 @@ package com.mathminds;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TemplateSolvers {
 
@@ -36,7 +37,9 @@ public class TemplateSolvers {
 
 
 
-    public static double placeholderSolve(ArrayList<Double> fields) {
-        return fields.get(0) + fields.get(1);
+    public static double placeholderSolve(HashMap<String, Double> fields) {
+        System.out.println("placeholdersolve running");
+        //fields: "_int:1-5_", "_int:6-10_"
+        return fields.get("_int:1-5_") + fields.get("_int:6-10_");
     }
 }
