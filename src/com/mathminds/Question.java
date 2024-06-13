@@ -76,4 +76,23 @@ public class Question {
         }
         return (Double) result;
     }
+
+
+    public double genAltAnswer() {
+        //randomizes fields and solves, then returns fields to previous state
+        HashMap<String, Double> oldFields = new HashMap<>();
+        for (Map.Entry<String, Double> field : fields.entrySet()) {
+            oldFields.put(field.getKey(), field.getValue());
+        }
+
+        this.randomizeFields();
+        double altAnswer = solve();
+        fields.clear();
+
+        for (Map.Entry<String, Double> oldField : oldFields.entrySet()) {
+            fields.put(oldField.getKey(), oldField.getValue());
+        }
+
+        return altAnswer;
+    }
 }
