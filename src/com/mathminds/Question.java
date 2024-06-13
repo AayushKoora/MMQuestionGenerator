@@ -58,8 +58,9 @@ public class Question {
 
 
     public double solve() {
+        Object result;
         try {
-            return (double) solver.invoke(null, fields);
+            result = solver.invoke(null, fields);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println("Error attempting to solve question.");
             System.out.println("templateId: " + templateId);
@@ -73,6 +74,6 @@ public class Question {
 
             return -1;
         }
-
+        return (Double) result;
     }
 }
