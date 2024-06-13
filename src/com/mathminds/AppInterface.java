@@ -81,7 +81,7 @@ public class AppInterface {
             //button that happens when you generate a test
             TestContainer test = genTest(testNameField.getText());
             CreateOutput createOutput = new CreateOutput(test);
-            //createOutput.pdf();
+            createOutput.pdf();
             System.out.println(createOutput.string());
         });
         genTest.setText("Generate Test");
