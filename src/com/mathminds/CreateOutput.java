@@ -103,6 +103,9 @@ public class CreateOutput {
             }
 
             output += "<p>" + optionsString + "</p>";
+
+            //spacing
+            output += "<h1> <br> <br> </h1>";
         }
 
         output += "</body></html>";

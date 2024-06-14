@@ -27,6 +27,11 @@ public class AppInterface {
     ArrayList<TemplateQuestion> templateQuestions;
 
 
+    public static final int maxQuestionCount = 20;
+    public static final boolean allQuestionsUniqueType = true;
+    public static final int doubleFieldsDecimalPlaces = 3;
+
+
 
     public AppInterface() {
         width = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -43,7 +48,7 @@ public class AppInterface {
         try {
             JSONObject obj;
             try {
-                obj = (JSONObject) parser.parse(new FileReader("res/questiontemplates.json"));
+                obj = (JSONObject) parser.parse(new FileReader("src/res/questiontemplates.json"));
             } catch (FileNotFoundException e) {
                 //this is not being ran in a ide environment, try to find the file in the current directory instead.
                 try {
@@ -108,7 +113,7 @@ public class AppInterface {
 
     private TestContainer genTest(String testTitle) {
         System.out.println("Generating test with title: " + testTitle);
-        TestContainer test = new TestContainer(testTitle, Math.min(templateQuestions.size(), 20), true, templateQuestions);
+        TestContainer test = new TestContainer(testTitle, Math.min(templateQuestions.size(), maxQuestionCount), allQuestionsUniqueType, templateQuestions);
         test.populateQuestions();
         test.randomizeQuestionFields();
         return test;

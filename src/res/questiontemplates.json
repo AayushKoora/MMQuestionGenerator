@@ -2,8 +2,15 @@
   {
     "type": "placeholder",
     "id": 1,
-    "astext": "Placeholder with answer = _int:1-5_ + _int:6-10_",
-    "fields": ["_int:1-5_", "_int:6-10_"],
+    "astext": "Placeholder with answer = _int:1~5_ + _int:6~10_",
+    "fields": ["_int:1~5_", "_int:6~10_"],
     "keymethod": "placeholderSolve"
+  },
+  {
+    "type": "othermoredifferentplaceholder",
+    "id": 2,
+    "astext": "Placeholder2 with answer = _int:1~5_ * _int:6~10_ + _double:-55.6~50.9_",
+    "fields": ["_int:1~5_", "_int:6~10_", "_double:-55.6~50.9_"],
+    "keymethod": "otherPlaceholderSolve"
   }
 ]}
