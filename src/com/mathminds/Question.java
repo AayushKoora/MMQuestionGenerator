@@ -28,15 +28,19 @@ public class Question {
         for (Map.Entry<String, Double> entry : fields.entrySet()) {
 
             String type = entry.getKey().split("_")[1].split(":")[0];
-            double lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("-")[0]);
-            double upperBound = Double.parseDouble(entry.getKey().split("-")[1].split("_")[0]);
+            double lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("~")[0]);
+            double upperBound = Double.parseDouble(entry.getKey().split("~")[1].split("_")[0]);
 
             Random random = new Random();
-            double newVal = switch (type) {
-                case "int" -> random.nextInt((int) lowerBound, (int) upperBound);
-                case "double" -> random.nextDouble(lowerBound, upperBound);
-                default -> -1.0;
-            };
+            double newVal = 0;
+            switch (type) {
+                case "int" -> newVal = random.nextInt((int) lowerBound, (int) upperBound);
+                case "double" -> {
+                    newVal = random.nextDouble(lowerBound, upperBound);
+                    double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
+                    newVal = Math.round(newVal * scale) / scale;
+                }
+            }
 
             fields.put(entry.getKey(), newVal);
         }
@@ -71,7 +75,8 @@ public class Question {
 
             return -1;
         }
-        return (Double) result;
+        double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
+        return Math.round((Double) result * scale) / scale;
     }
 
 
