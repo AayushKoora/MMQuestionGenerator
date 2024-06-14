@@ -6,8 +6,7 @@ import org.json.simple.parser.JSONParser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,7 +41,24 @@ public class AppInterface {
         JSONParser parser = new JSONParser();
 
         try {
-            JSONObject obj = (JSONObject) parser.parse(new FileReader("res/questiontemplates.json"));
+            JSONObject obj;
+            try {
+                obj = (JSONObject) parser.parse(new FileReader("res/questiontemplates.json"));
+            } catch (FileNotFoundException e) {
+                //this is not being ran in a ide environment, try to find the file in the current directory instead.
+                try {
+                    obj = (JSONObject) parser.parse(new FileReader("questiontemplates.json"));
+                } catch (FileNotFoundException e2) {
+                    //file is not where it is supposed to be, tell the user they messed up and crash the app.
+                    System.out.println("*** File questiontemplates.json not found in current directory or in (ide) res/questiontemplates.json");
+                    System.out.println("*** Error 1: " + e);
+                    System.out.println("*** Error 2: " + e2);
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    obj = null; //just to clear up ide errors
+                }
+            }
+
             JSONArray arr = (JSONArray) obj.get("templates");
             Iterator<JSONObject> iterator = arr.iterator();
 
@@ -54,9 +70,8 @@ public class AppInterface {
                 String asText = "" + templateVal.get("astext");
                 String keyMethod = "" + templateVal.get("keymethod");
 
-                ArrayList<String> fields = new ArrayList<>();
                 JSONArray fieldArr = (JSONArray) templateVal.get("fields");
-                fields.addAll(fieldArr);
+                ArrayList<String> fields = new ArrayList<>(fieldArr);
 
                 templateQuestions.add(new TemplateQuestion(type, Integer.parseInt(id), asText, fields, keyMethod));
             }
@@ -81,7 +96,7 @@ public class AppInterface {
             //button that happens when you generate a test
             TestContainer test = genTest(testNameField.getText());
             CreateOutput createOutput = new CreateOutput(test);
-            //createOutput.pdf();
+            createOutput.pdf();
             System.out.println(createOutput.string());
         });
         genTest.setText("Generate Test");

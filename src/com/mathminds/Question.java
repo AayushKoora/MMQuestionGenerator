@@ -2,14 +2,11 @@ package com.mathminds;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Question {
 
-    public int templateId = -1;
+    public int templateId;
     public String type;
     public String templateText;
     public ArrayList<String> fieldNames;
@@ -70,10 +67,24 @@ public class Question {
 
             System.out.println("ERROR MESSAGE: " + e.getMessage());
             System.out.println("ERROR CAUSE: " + e.getCause());
-            System.out.println("ERROR STACK TRACE: " + e.getStackTrace());
+            System.out.println("ERROR STACK TRACE: " + Arrays.toString(e.getStackTrace()));
 
             return -1;
         }
         return (Double) result;
+    }
+
+
+    public double genAltAnswer() {
+        //randomizes fields and solves, then returns fields to previous state
+        HashMap<String, Double> oldFields = new HashMap<>(fields);
+
+        this.randomizeFields();
+        double altAnswer = solve();
+        fields.clear();
+
+        fields.putAll(oldFields);
+
+        return altAnswer;
     }
 }
