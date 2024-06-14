@@ -6,8 +6,6 @@ import org.json.simple.parser.JSONParser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -72,9 +70,8 @@ public class AppInterface {
                 String asText = "" + templateVal.get("astext");
                 String keyMethod = "" + templateVal.get("keymethod");
 
-                ArrayList<String> fields = new ArrayList<>();
                 JSONArray fieldArr = (JSONArray) templateVal.get("fields");
-                fields.addAll(fieldArr);
+                ArrayList<String> fields = new ArrayList<>(fieldArr);
 
                 templateQuestions.add(new TemplateQuestion(type, Integer.parseInt(id), asText, fields, keyMethod));
             }

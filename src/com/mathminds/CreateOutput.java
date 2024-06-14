@@ -29,7 +29,7 @@ public class CreateOutput {
         try {
             //make the directory to store output files if it does not already exist
             File newDir = new File(System.getProperty("user.home") + "/Documents/MathMindsOutput");
-            newDir.mkdir();
+            System.out.println("Did create new directory: " + newDir.mkdir());
 
             //create the pdf file
             Document document = new Document();
@@ -46,7 +46,7 @@ public class CreateOutput {
 
             System.out.println("PDF created successfully.");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

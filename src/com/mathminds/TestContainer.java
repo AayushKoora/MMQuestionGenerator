@@ -39,12 +39,13 @@ public class TestContainer {
 
             TemplateQuestion potentialTemplateQuestion = templates.get(random.nextInt(0, templates.size()));
 
-            //dont add the question if its type is already present.
+            //don't add the question if its type is already present.
             if (shouldQuestionsBeUniqueType) {
                 boolean isTemplatePresent = false;
                 for (Question q : questions) {
                     if (potentialTemplateQuestion.type.equals(q.type)) {
                         isTemplatePresent = true;
+                        break;
                     }
                 }
                 if (isTemplatePresent) {
