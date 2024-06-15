@@ -37,16 +37,21 @@ public class TemplateSolvers {
 
 
 
-    public static double placeholderSolve(HashMap<String, Double> fields) {
+    public static double placeholderSolve(HashMap<String, String> fields) {
         System.out.println("placeholdersolve running");
         //fields: "_int:1~5_", "_int:6~10_"
-        return fields.get("_int:1~5_") + fields.get("_int:6~10_");
+        double field1 = Double.parseDouble(fields.get("_int:1~5_"));
+        double field2 = Double.parseDouble(fields.get("_int:6~10_"));
+        return field1 + field2;
     }
 
 
-    public static double otherPlaceholderSolve(HashMap<String, Double> fields) {
+    public static double otherPlaceholderSolve(HashMap<String, String> fields) {
         System.out.println("otherPlaceholderSolve running");
         //fields: "_int:1~5_", "_int:6~10_", "_double:-55.6~50.9_"
-        return fields.get("_int:1~5_") * fields.get("_int:6~10_") + fields.get("_double:-55.6~50.9_");
+        double field1 = Double.parseDouble(fields.get("_int:1~5_"));
+        double field2 = Double.parseDouble(fields.get("_int:6~10_"));
+        double field3 = Double.parseDouble(fields.get("_double:-55.6~50.9_"));
+        return field1 * field2 + field3;
     }
 }

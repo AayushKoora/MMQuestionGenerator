@@ -33,7 +33,7 @@ public class TestContainer {
             String type;
             String templateText;
             ArrayList<String> fieldNames;
-            HashMap<String, Double> fields;
+            HashMap<String, String> fields;
             Method solver;
 
 
@@ -61,7 +61,7 @@ public class TestContainer {
             fields = new HashMap<>();
 
             for (String key : fieldNames) {
-                fields.put(key, -1.0);
+                fields.put(key, "");
             }
 
             TemplateSolvers accessSolvers = new TemplateSolvers();

@@ -10,11 +10,11 @@ public class Question {
     public String type;
     public String templateText;
     public ArrayList<String> fieldNames;
-    public HashMap<String, Double> fields;
+    public HashMap<String, String> fields;
     public Method solver;
 
 
-    public Question(int id, String type, String templateText, ArrayList<String> fieldNames, HashMap<String, Double> fields, Method solver) {
+    public Question(int id, String type, String templateText, ArrayList<String> fieldNames, HashMap<String, String> fields, Method solver) {
         this.templateId = id;
         this.type = type;
         this.templateText = templateText;
@@ -25,20 +25,27 @@ public class Question {
 
 
     public void randomizeFields() {
-        for (Map.Entry<String, Double> entry : fields.entrySet()) {
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
 
             String type = entry.getKey().split("_")[1].split(":")[0];
-            double lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("~")[0]);
-            double upperBound = Double.parseDouble(entry.getKey().split("~")[1].split("_")[0]);
+            double lowerBound = 0;
+            double upperBound = 0;
+            if (!type.equals("string")) {
+                lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("~")[0]);
+                upperBound = Double.parseDouble(entry.getKey().split("~")[1].split("_")[0]);
+            }
 
             Random random = new Random();
-            double newVal = 0;
+            String newVal = "";
             switch (type) {
-                case "int" -> newVal = random.nextInt((int) lowerBound, (int) upperBound);
+                case "int" -> newVal = "" + random.nextInt((int) lowerBound, (int) upperBound);
                 case "double" -> {
-                    newVal = random.nextDouble(lowerBound, upperBound);
+                    double tempVal = random.nextDouble(lowerBound, upperBound);
                     double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
-                    newVal = Math.round(newVal * scale) / scale;
+                    newVal = "" + Math.round(tempVal * scale) / scale;
+                }
+                case "string" -> {
+                    //newVal = ;
                 }
             }
 
@@ -51,7 +58,7 @@ public class Question {
         String output = templateText;
 
         for (String field : fieldNames) {
-            output = output.replace(field, ""  + fields.get(field));
+            output = output.replace(field, fields.get(field));
         }
 
         return output;
@@ -82,7 +89,7 @@ public class Question {
 
     public double genAltAnswer() {
         //randomizes fields and solves, then returns fields to previous state
-        HashMap<String, Double> oldFields = new HashMap<>(fields);
+        HashMap<String, String> oldFields = new HashMap<>(fields);
 
         this.randomizeFields();
         double altAnswer = solve();
