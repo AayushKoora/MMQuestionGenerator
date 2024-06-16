@@ -15,8 +15,6 @@ public class CreateOutput {
 
     public TestContainer test;
 
-    public static final int totalAnswerChoices = 5;
-
     public CreateOutput(TestContainer test) {
         this.test = test;
     }
@@ -53,6 +51,7 @@ public class CreateOutput {
 
 
     public String html() {
+
         String output = "<html><body>";
 
         output += "<h1>" + test.title + "</h1>";
@@ -75,40 +74,62 @@ public class CreateOutput {
 
             String optionsString = "";
 
+            //determine total answer choices
+            int totalAnswerChoices = 0;
+            try {
+                for (String fieldName : q.fieldNames) {
+                    if (fieldName.contains("_var:multiplechoice=")) {
+                        totalAnswerChoices = Integer.parseInt(fieldName.split("_var:multiplechoice=")[1].split("_")[0]);
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Encountered error when attempting to read total answer choices field variables");
+            }
 
-            int realAnswer = random.nextInt(1, totalAnswerChoices + 1);
-            double answer = q.solve();
-            ArrayList<Double> answerChoices = new ArrayList<>();
 
-            for (int i = 1; i <= totalAnswerChoices; i++) {
+            String answer = q.solve();
 
-                if (i == realAnswer && !answerChoices.contains(answer)) {
-                    answerChoices.add(answer);
-                } else {
-                    boolean hasGeneratedUniqueAnswer = false;
-                    while (!hasGeneratedUniqueAnswer) {
-                        double newAltAnswer = q.genAltAnswer();
-                        if (!answerChoices.contains(newAltAnswer)) {
-                            answerChoices.add(newAltAnswer);
-                            hasGeneratedUniqueAnswer = true;
+            if (totalAnswerChoices > 0) { //if question is configured for multiple answer choices
+                int realAnswer = random.nextInt(1, totalAnswerChoices + 1);
+                ArrayList<String> answerChoices = new ArrayList<>();
+
+                for (int i = 1; i <= totalAnswerChoices; i++) {
+                    if (i == realAnswer && !answerChoices.contains(answer)) {
+                        answerChoices.add(answer);
+                    } else {
+                        boolean hasGeneratedUniqueAnswer = false;
+                        while (!hasGeneratedUniqueAnswer) {
+                            String newAltAnswer = q.genAltAnswer();
+                            if (!answerChoices.contains(newAltAnswer)) {
+                                answerChoices.add(newAltAnswer);
+                                hasGeneratedUniqueAnswer = true;
+                            }
                         }
                     }
                 }
+
+                for (int optionCount = 0; optionCount < answerChoices.size(); optionCount++) {
+                    String answerChoice = "" + answerChoices.get(optionCount);
+                    optionsString += ("" + (char) ('A' + optionCount));
+                    optionsString += ": " + answerChoice + "<br>";
+                }
+
+                output += "<h1><br> </h1>";
+                output += "<p>" + optionsString + "</p>";
+            } else {
+                output += "<h1><br> </h1>";
+                output += "<p><br>___________</p>";
             }
 
-            for (int optionCount = 0; optionCount < answerChoices.size(); optionCount++) {
-                String answerChoice = "" + answerChoices.get(optionCount);
-                optionsString += ("" + (char) ('A' + optionCount));
-                optionsString += ": " + answerChoice + "<br>";
-            }
-
-            output += "<p>" + optionsString + "</p>";
 
             //spacing
             output += "<h1> <br> <br> </h1>";
         }
 
         output += "</body></html>";
+
+        System.out.println(output);
         return output;
     }
 

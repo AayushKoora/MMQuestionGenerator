@@ -1,16 +1,16 @@
 {"templates": [
   {
-    "type": "placeholder",
+    "type": "Circles, Area of Circle, Circumference",
     "id": 1,
-    "astext": "Placeholder with answer = _int:1~5_ + _int:6~10_",
-    "fields": ["_int:1~5_", "_int:6~10_"],
-    "keymethod": "placeholderSolve"
+    "astext": "A circular trampoline has a unique property: the ratio of its area to its circumference is equal to _int:4~50_. Determine the radius of the trampoline. (Assume π is 3.14, and round to the nearest tenth)",
+    "fields": ["_int:4~50_", "_var:multiplechoice=5_"],
+    "keymethod": "circleRatio"
   },
   {
-    "type": "othermoredifferentplaceholder",
+    "type": "Circles, Area of Circle, Circumference 2",
     "id": 2,
-    "astext": "Placeholder2 with answer = _int:1~5_ * _int:6~10_ + _double:-55.6~50.9_",
-    "fields": ["_int:1~5_", "_int:6~10_", "_double:-55.6~50.9_"],
-    "keymethod": "otherPlaceholderSolve"
+    "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:3~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:3~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
+    "fields": ["_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_", "_var:multiplechoice=3_"],
+    "keymethod": "pizzaAreas"
   }
 ]}
