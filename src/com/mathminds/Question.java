@@ -30,12 +30,13 @@ public class Question {
             String type = entry.getKey().split("_")[1].split(":")[0];
             double lowerBound = 0;
             double upperBound = 0;
-            if (!type.equals("string")) {
+            if (type.equals("int") || type.equals("double")) {
                 lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("~")[0]);
                 upperBound = Double.parseDouble(entry.getKey().split("~")[1].split("_")[0]);
             }
 
             Random random = new Random();
+
             String newVal = "";
             switch (type) {
                 case "int" -> newVal = "" + random.nextInt((int) lowerBound, (int) upperBound);
@@ -45,7 +46,9 @@ public class Question {
                     newVal = "" + Math.round(tempVal * scale) / scale;
                 }
                 case "string" -> {
-                    //newVal = ;
+                    ArrayList<String> potentialOptions = new ArrayList<>();
+                    Collections.addAll(potentialOptions, entry.getKey().split(":")[1].split("_")[0].split(","));
+                    newVal = potentialOptions.get(random.nextInt(0, potentialOptions.size()));
                 }
             }
 
@@ -58,14 +61,15 @@ public class Question {
         String output = templateText;
 
         for (String field : fieldNames) {
-            output = output.replace(field, fields.get(field));
+            System.out.println(fields.get(field));
+            output = output.replaceAll(field, fields.get(field));
         }
 
         return output;
     }
 
 
-    public double solve() {
+    public String solve() {
         Object result;
         try {
             result = solver.invoke(null, fields);
@@ -80,19 +84,18 @@ public class Question {
             System.out.println("ERROR CAUSE: " + e.getCause());
             System.out.println("ERROR STACK TRACE: " + Arrays.toString(e.getStackTrace()));
 
-            return -1;
+            return "";
         }
-        double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
-        return Math.round((Double) result * scale) / scale;
+        return (String) result;
     }
 
 
-    public double genAltAnswer() {
+    public String genAltAnswer() {
         //randomizes fields and solves, then returns fields to previous state
         HashMap<String, String> oldFields = new HashMap<>(fields);
 
         this.randomizeFields();
-        double altAnswer = solve();
+        String altAnswer = solve();
         fields.clear();
 
         fields.putAll(oldFields);

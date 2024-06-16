@@ -36,13 +36,13 @@ public class TestContainer {
             HashMap<String, String> fields;
             Method solver;
 
-
             TemplateQuestion potentialTemplateQuestion = templates.get(random.nextInt(0, templates.size()));
 
             //don't add the question if its type is already present.
             if (shouldQuestionsBeUniqueType) {
                 boolean isTemplatePresent = false;
                 for (Question q : questions) {
+                    System.out.println(potentialTemplateQuestion.type + ":" + q.type);
                     if (potentialTemplateQuestion.type.equals(q.type)) {
                         isTemplatePresent = true;
                         break;

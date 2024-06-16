@@ -29,7 +29,7 @@ public class AppInterface {
 
     public static final int maxQuestionCount = 20;
     public static final boolean allQuestionsUniqueType = true;
-    public static final int doubleFieldsDecimalPlaces = 3;
+    public static final int doubleFieldsDecimalPlaces = 2;
 
 
 

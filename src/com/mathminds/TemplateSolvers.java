@@ -35,23 +35,48 @@ public class TemplateSolvers {
 
     //question/template methods begin here!
 
-
-
-    public static double placeholderSolve(HashMap<String, String> fields) {
-        System.out.println("placeholdersolve running");
-        //fields: "_int:1~5_", "_int:6~10_"
-        double field1 = Double.parseDouble(fields.get("_int:1~5_"));
-        double field2 = Double.parseDouble(fields.get("_int:6~10_"));
-        return field1 + field2;
+    public static String circleRatio(HashMap<String, String> fields) {
+        //fields: "_int:4~50_"
+        double ratio = Double.parseDouble(fields.get("_int:4~50_"));
+        //radius = 2 * ratio
+        double radius;
+        radius = 2 * ratio;
+        return "" + radius;
     }
 
 
-    public static double otherPlaceholderSolve(HashMap<String, String> fields) {
-        System.out.println("otherPlaceholderSolve running");
-        //fields: "_int:1~5_", "_int:6~10_", "_double:-55.6~50.9_"
-        double field1 = Double.parseDouble(fields.get("_int:1~5_"));
-        double field2 = Double.parseDouble(fields.get("_int:6~10_"));
-        double field3 = Double.parseDouble(fields.get("_double:-55.6~50.9_"));
-        return field1 * field2 + field3;
+    public static String pizzaAreas(HashMap<String, String> fields) {
+        //fields: "_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"
+        double inchesCount = Double.parseDouble(fields.get("_int:3~18_"));
+        String targetPlace = fields.get("_string:1st,2nd,3rd_");
+        String order = fields.get("_string:least to greatest,greatest to least_");
+
+        //Pizza A has inchesCount radius
+        //Pizza B has inchesCount diameter
+        //Pizza C has inchesCount circumference
+
+        switch (targetPlace) {
+            case "1st": {
+                if (order.equals("least to greatest")) {
+                    return "Pizza C";
+                } else {
+                    return "Pizza A";
+                }
+            }
+            case "2nd": {
+                return "Pizza B";
+            }
+            case "3rd": {
+                if (order.equals("least to greatest")) {
+                    return "Pizza A";
+                } else {
+                    return "Pizza C";
+                }
+            }
+        }
+
+        return "give up and cry";
     }
+
+
 }
