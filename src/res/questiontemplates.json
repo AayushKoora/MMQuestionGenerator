@@ -7,10 +7,18 @@
     "keymethod": "circleRatio"
   },
   {
-    "type": "Circles, Area of Circle, Circumference 2",
+    "type": "Circles, Area of Circle, Circumference",
     "id": 2,
     "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:3~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:3~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
-    "fields": ["_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_", "_var:multiplechoice=3_"],
+    "fields": ["_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
     "keymethod": "pizzaAreas"
-  }
+  },
+  {
+    "type": "Right Triangle Trigonometry, Area of Triangle, Pythagorean Theorem",
+    "id": 3,
+    "astext": "A triangular garden has a base of _int:10~50_ meters and a height of _int:10~70_ meters. Calculate the area of the garden.",
+    "fields": ["_int:10~50_", "_int:10~70_"],
+    "keymethod": "areaTriangle"
+
+}
 ]}

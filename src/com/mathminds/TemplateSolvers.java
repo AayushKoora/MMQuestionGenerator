@@ -79,4 +79,9 @@ public class TemplateSolvers {
     }
 
 
+    public static String areaTriangle(HashMap<String, String> fields) {
+        double width = Double.parseDouble(fields.get("_int:10~50_"));
+        double height = Double.parseDouble(fields.get("_int:10~70_"));
+        return "" + 0.5 * width * height;
+    }
 }

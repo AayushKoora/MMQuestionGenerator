@@ -113,10 +113,21 @@ public class AppInterface {
 
     private TestContainer genTest(String testTitle) {
         System.out.println("Generating test with title: " + testTitle);
-        TestContainer test = new TestContainer(testTitle, Math.min(templateQuestions.size(), maxQuestionCount), allQuestionsUniqueType, templateQuestions);
+        TestContainer test = new TestContainer(testTitle, Math.min(uniqueTypeCount(templateQuestions), maxQuestionCount), allQuestionsUniqueType, templateQuestions);
         test.populateQuestions();
         test.randomizeQuestionFields();
         return test;
+    }
+
+
+    private int uniqueTypeCount(ArrayList<TemplateQuestion> templateQuestions) {
+        ArrayList<String> containedTypes = new ArrayList<>();
+        for (TemplateQuestion q : templateQuestions) {
+            if (!containedTypes.contains(q.type)) {
+                containedTypes.add(q.type);
+            }
+        }
+        return containedTypes.size();
     }
 
 
