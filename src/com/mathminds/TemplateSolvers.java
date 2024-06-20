@@ -16,7 +16,7 @@ public class TemplateSolvers {
         templateSolvingMethods = new ArrayList<>();
 
         for (Method m : TemplateSolvers.class.getDeclaredMethods()) {
-            if (!m.getName().equals("TemplateSolvers") && !m.getName().equals("retrieveMethod") && !m.getName().equals("getVarFieldValue")) {
+            if (!m.getName().equals("TemplateSolvers") && !m.getName().equals("retrieveMethod") && !m.getName().equals("getVarFieldValue") && !m.getName().equals("round")) {
                 templateSolvingMethods.add(m);
             }
         }
@@ -44,6 +44,12 @@ public class TemplateSolvers {
         }
 
         return "";
+    }
+
+
+    public static double round(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round((Double) value * scale) / scale;
     }
 
 
@@ -117,6 +123,6 @@ public class TemplateSolvers {
         double shadowLength = Double.parseDouble(fields.get("_int:10~20_"));
         double angle = Double.parseDouble(fields.get("_int:45~90_"));
         //height = shadowLength * tan(angle)
-        return "" + (shadowLength + Math.tan(Math.toRadians(angle)));
+        return shadowLength + " * tan(" + angle + ") =" + round(shadowLength + Math.tan(Math.toRadians(angle)), 3);
     }
 }

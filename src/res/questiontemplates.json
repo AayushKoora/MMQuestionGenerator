@@ -28,10 +28,10 @@
     "keymethod": "circleRatio"
   },
   {
-    "type": "Right Triangle Trigonometry, Area of Triangle, Pythagorean Theorem",
+    "type": "Right Triangle Trigonometry, Area of Triangle, Pythagorean Theorem 1",
     "id": 5,
     "astext": "A flagpole casts a shadow that is _int:10~20_ meters long on level ground. The angle of elevation from the tip of the shadow to the top of the flagpole is _int:45~90_ degrees. Determine the height of the flagpole.",
-    "fields": ["_int:10~20_", "_int:45~90_"],
+    "fields": ["_int:10~20_", "_int:45~90_", "_var:multiplechoice=3_"],
     "keymethod": "trigonometry"
   }
 ]}
