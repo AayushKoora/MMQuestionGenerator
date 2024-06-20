@@ -3,7 +3,7 @@
     "type": "Circles, Area of Circle, Circumference",
     "id": 1,
     "astext": "A circular trampoline has a unique property: the ratio of its area to its circumference is equal to _int:4~50_. Determine the radius of the trampoline. (Assume π is 3.14, and round to the nearest tenth)",
-    "fields": ["_int:4~50_", "_var:multiplechoice=5_"],
+    "fields": ["_int:4~50_", "_var:multiplechoice=5_", "_var:type=trampoline_"],
     "keymethod": "circleRatio"
   },
   {
@@ -19,6 +19,19 @@
     "astext": "A triangular garden has a base of _int:10~50_ meters and a height of _int:10~70_ meters. Calculate the area of the garden.",
     "fields": ["_int:10~50_", "_int:10~70_"],
     "keymethod": "areaTriangle"
-
-}
+  },
+  {
+    "type": "Circles, Area of Circle, Circumference",
+    "id": 4,
+    "astext": "The area of a circle is equal to its circumference. Determine the radius of the circle.",
+    "fields": ["_var:type=equal"],
+    "keymethod": "circleRatio"
+  },
+  {
+    "type": "Right Triangle Trigonometry, Area of Triangle, Pythagorean Theorem",
+    "id": 5,
+    "astext": "A flagpole casts a shadow that is _int:10~20_ meters long on level ground. The angle of elevation from the tip of the shadow to the top of the flagpole is _int:45~90_ degrees. Determine the height of the flagpole.",
+    "fields": ["_int:10~20_", "_int:45~90_"],
+    "keymethod": "trigonometry"
+  }
 ]}

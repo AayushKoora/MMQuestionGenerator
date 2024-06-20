@@ -3,6 +3,7 @@ package com.mathminds;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TemplateSolvers {
 
@@ -15,7 +16,7 @@ public class TemplateSolvers {
         templateSolvingMethods = new ArrayList<>();
 
         for (Method m : TemplateSolvers.class.getDeclaredMethods()) {
-            if (!m.getName().equals("TemplateSolvers") && !m.getName().equals("retrieveMethod")) {
+            if (!m.getName().equals("TemplateSolvers") && !m.getName().equals("retrieveMethod") && !m.getName().equals("getVarFieldValue")) {
                 templateSolvingMethods.add(m);
             }
         }
@@ -32,16 +33,41 @@ public class TemplateSolvers {
     }
 
 
+    public static String getVarFieldValue(String targetVarField, HashMap<String, String> fields) {
+
+        for (Map.Entry<String, String> field : fields.entrySet()) {
+            if (field.getKey().split("_")[1].split(":")[0].equals("var")) {
+                if (field.getKey().split(":")[1].split("=")[0].equals(targetVarField)) {
+                    return field.getKey().split("=")[1].split("_")[0];
+                }
+            }
+        }
+
+        return "";
+    }
+
+
 
     //question/template methods begin here!
 
     public static String circleRatio(HashMap<String, String> fields) {
-        //fields: "_int:4~50_"
-        double ratio = Double.parseDouble(fields.get("_int:4~50_"));
-        //radius = 2 * ratio
-        double radius;
-        radius = 2 * ratio;
-        return "" + radius;
+
+        String type = getVarFieldValue("type", fields);
+
+        if (type.equals("equal")) {
+            //answer is always 2.0
+            return "" + 2.0;
+        } else if (type.equals("trampoline")) {
+            //fields: "_int:4~50_"
+            double ratio = Double.parseDouble(fields.get("_int:4~50_"));
+
+            //radius = 2 * ratio
+            double radius;
+            radius = 2 * ratio;
+            return "" + radius;
+        }
+
+        return "";
     }
 
 
@@ -83,5 +109,14 @@ public class TemplateSolvers {
         double width = Double.parseDouble(fields.get("_int:10~50_"));
         double height = Double.parseDouble(fields.get("_int:10~70_"));
         return "" + 0.5 * width * height;
+    }
+
+
+    public static String trigonometry(HashMap<String, String> fields) {
+        //"_int:10~20_", "_int:45~90_"
+        double shadowLength = Double.parseDouble(fields.get("_int:10~20_"));
+        double angle = Double.parseDouble(fields.get("_int:45~90_"));
+        //height = shadowLength * tan(angle)
+        return "" + (shadowLength + Math.tan(Math.toRadians(angle)));
     }
 }
