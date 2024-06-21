@@ -76,7 +76,10 @@ public class AppInterface {
                 String keyMethod = "" + templateVal.get("keymethod");
 
                 JSONArray fieldArr = (JSONArray) templateVal.get("fields");
-                ArrayList<String> fields = new ArrayList<>(fieldArr);
+                ArrayList<String> fields = new ArrayList<>();
+                for (Object field : fieldArr) {
+                    fields.add((String) field);
+                }
 
                 templateQuestions.add(new TemplateQuestion(type, Integer.parseInt(id), asText, fields, keyMethod));
             }
@@ -113,10 +116,21 @@ public class AppInterface {
 
     private TestContainer genTest(String testTitle) {
         System.out.println("Generating test with title: " + testTitle);
-        TestContainer test = new TestContainer(testTitle, Math.min(templateQuestions.size(), maxQuestionCount), allQuestionsUniqueType, templateQuestions);
+        TestContainer test = new TestContainer(testTitle, Math.min(uniqueTypeCount(templateQuestions), maxQuestionCount), allQuestionsUniqueType, templateQuestions);
         test.populateQuestions();
         test.randomizeQuestionFields();
         return test;
+    }
+
+
+    private int uniqueTypeCount(ArrayList<TemplateQuestion> templateQuestions) {
+        ArrayList<String> containedTypes = new ArrayList<>();
+        for (TemplateQuestion q : templateQuestions) {
+            if (!containedTypes.contains(q.type)) {
+                containedTypes.add(q.type);
+            }
+        }
+        return containedTypes.size();
     }
 
 

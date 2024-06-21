@@ -42,7 +42,6 @@ public class TestContainer {
             if (shouldQuestionsBeUniqueType) {
                 boolean isTemplatePresent = false;
                 for (Question q : questions) {
-                    System.out.println(potentialTemplateQuestion.type + ":" + q.type);
                     if (potentialTemplateQuestion.type.equals(q.type)) {
                         isTemplatePresent = true;
                         break;

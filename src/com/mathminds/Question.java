@@ -25,35 +25,63 @@ public class Question {
 
 
     public void randomizeFields() {
-        for (Map.Entry<String, String> entry : fields.entrySet()) {
-
-            String type = entry.getKey().split("_")[1].split(":")[0];
+        for (String fieldName : fieldNames) {
+            String type = fieldName.split("_")[1].split(":")[0];
             double lowerBound = 0;
             double upperBound = 0;
             if (type.equals("int") || type.equals("double")) {
-                lowerBound = Double.parseDouble(entry.getKey().split(":")[1].split("~")[0]);
-                upperBound = Double.parseDouble(entry.getKey().split("~")[1].split("_")[0]);
+                lowerBound = Double.parseDouble(fieldName.split(":")[1].split("~")[0]);
+                upperBound = Double.parseDouble(fieldName.split("~")[1].split("_")[0]);
             }
 
             Random random = new Random();
 
             String newVal = "";
             switch (type) {
-                case "int" -> newVal = "" + random.nextInt((int) lowerBound, (int) upperBound);
+                case "int" -> newVal = "" + random.nextInt((int) lowerBound, (int) upperBound + 1);
                 case "double" -> {
                     double tempVal = random.nextDouble(lowerBound, upperBound);
                     double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
                     newVal = "" + Math.round(tempVal * scale) / scale;
                 }
+                case "sequence" -> {
+                    //_sequence:pos=1&initial=3~7&scale=2~7_
+                    int pos = Integer.parseInt(fieldName.split("=")[1].split("&")[0]);
+                    int initial;
+                    if (pos == 1) {
+                        int lowerBoundInitial = Integer.parseInt(fieldName.split("initial=")[1].split("~")[0]);
+                        int upperBoundInitial = Integer.parseInt(fieldName.split("initial=")[1].split("&")[0].split("~")[1]);
+
+                        initial = random.nextInt(lowerBoundInitial, upperBoundInitial + 1);
+                    } else {
+                        initial = Integer.parseInt(fields.get(fieldNames.get(0)));
+                    }
+                    int scale;
+                    int lowerBoundScale = Integer.parseInt(fieldName.split("scale=")[1].split("~")[0]);
+                    int upperBoundScale = Integer.parseInt(fieldName.split("scale=")[1].split("_")[0].split("~")[1]);
+                    scale = random.nextInt(lowerBoundScale, upperBoundScale + 1);
+                    if (pos == 1) {
+                        newVal = "" + initial;
+                    } else {
+                        newVal = "" + (initial + scale * (pos - 1));
+                    }
+                }
                 case "string" -> {
                     ArrayList<String> potentialOptions = new ArrayList<>();
-                    Collections.addAll(potentialOptions, entry.getKey().split(":")[1].split("_")[0].split(","));
+                    Collections.addAll(potentialOptions, fieldName.split(":")[1].split("_")[0].split(","));
                     newVal = potentialOptions.get(random.nextInt(0, potentialOptions.size()));
+                }
+                case "var" -> {
+                    newVal = fieldName.split("=")[1].split("_")[0];
                 }
             }
 
-            fields.put(entry.getKey(), newVal);
+            fields.put(fieldName, newVal);
         }
+
+
+
+
     }
 
 
@@ -61,7 +89,6 @@ public class Question {
         String output = templateText;
 
         for (String field : fieldNames) {
-            System.out.println(fields.get(field));
             output = output.replaceAll(field, fields.get(field));
         }
 
@@ -72,7 +99,7 @@ public class Question {
     public String solve() {
         Object result;
         try {
-            result = solver.invoke(null, fields);
+            result = solver.invoke(null, fields, fieldNames);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println("Error attempting to solve question.");
             System.out.println("templateId: " + templateId);
