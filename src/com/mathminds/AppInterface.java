@@ -76,7 +76,10 @@ public class AppInterface {
                 String keyMethod = "" + templateVal.get("keymethod");
 
                 JSONArray fieldArr = (JSONArray) templateVal.get("fields");
-                ArrayList<String> fields = new ArrayList<>(fieldArr);
+                ArrayList<String> fields = new ArrayList<>();
+                for (Object field : fieldArr) {
+                    fields.add((String) field);
+                }
 
                 templateQuestions.add(new TemplateQuestion(type, Integer.parseInt(id), asText, fields, keyMethod));
             }
