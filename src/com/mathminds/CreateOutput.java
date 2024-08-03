@@ -19,7 +19,6 @@ public class CreateOutput {
         this.test = test;
     }
 
-
     public void pdf() {
         //code to generate a pdf file and save it to the user's device
         System.out.println("Attempting to generate a pdf with object: " + test);

@@ -238,20 +238,26 @@ public class TemplateSolvers {
         String type = fields.get(fieldNames.get(0));
         double area = Double.parseDouble(fields.get(fieldNames.get(1)));
         double greater = Double.parseDouble(fields.get(fieldNames.get(2)));
-
-        double b = greater * -1;
-        double sqrt = Math.sqrt(Math.pow(b, 2) - 4 * area);
-        double val1 = (-1 * b + sqrt) / 2;
-        double val2 = (-1 * b - sqrt) / 2;
+        //6 + given = other
+        //other * given = 112
+        //(6 + given) * given = 112
+        //given^2 + 6*given -112 = 0
+        double b = greater;
+        double sqrt = Math.sqrt(Math.pow(b, 2) - 4 * (-1 * area));
+        double val1 = (b + sqrt) / 2;
+        double val2 = (b - sqrt) / 2;
         double result = round(Math.max(val1, val2), AppInterface.doubleFieldsDecimalPlaces);
 
         if (type.equals("width")) {
-            return "Length: " + (result - greater) + " | " + (result);
+            return "Length: " + (result - greater) + " | Width: " + (result);
         } else if (type.equals("length")) {
-            return "Length: " + (result) + " | " + (result - greater);
+            return "Length: " + (result) + " | Width: " + (result - greater);
         } else {
             return "NO APPLICABLE TYPE VAR IN SOLVER";
         }
+
+        //x^2 + givenNum * x - area
+        //find factors of area that add to give givenNum
     }
 
 

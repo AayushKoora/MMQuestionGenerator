@@ -44,22 +44,22 @@
   {
     "type": "Linear Equations",
     "id": 7,
-  "astext": "Tom bought a total of _int:20~80_ pens and pencils. Each pen costs $_double:1.25~2.75_ and each pencil costs $_double:0.1~0.99_. He spent a total of $_double:80.0~120.0_. How many pens did he buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:target=y_", "_var:multiplechoice=3_"],
+  "astext": "Tom bought a total of _int:20~80_ pens and pencils. Each pen costs $_int:1~3_ and each pencil costs $_int:1~4_. He spent a total of $_int:80~120_. How many pens did he buy? (Truncate your answer to the next lowest integer)",
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_"],
     "keymethod": "linEq"
   },
   {
     "type": "Linear Equations",
     "id": 8,
-    "astext": "Sally bought a total of _int:20~80_ apples and bananas. Each apple costs $_double:1.25~2.75_ and each banana costs $_double:0.1~0.99_. She spent a total of $_double:80.0~120.0_. How many apples did she buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:target=x_", "_var:multiplechoice=3_"],
+    "astext": "Sally bought a total of _int:20~80_ apples and bananas. Each apple costs $_int:1~3_ and each banana costs $_int:1~4_. She spent a total of $_int:80~120_. How many apples did she buy? (Truncate your answer to the next lowest integer)",
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_"],
     "keymethod": "linEq"
   },
   {
     "type": "Sequences",
     "id": 9,
     "astext": "Rebecca loves to read books. On Monday, she reads _sequence:pos=1&initial=1~20&scale=5~10_ pages. On Tuesday, she reads _sequence:pos=2&initial=1~20&scale=5~10_ pages. On Wednesday, she reads _sequence:pos=3&initial=1~20&scale=5~10_ pages. She continued this pattern for _int:5~10_ days. How many pages did Rebecca read in total?",
-    "fields": ["_sequence:pos=1&initial=1~20&scale=5~10_", "_sequence:pos=2&initial=1~20&scale=5~10_", "_sequence:pos=3&initial=1~20&scale=5~10_", "_int:5~10_"],
+    "fields": ["_sequence:pos=1&initial=2~20&scale=5~10_", "_sequence:pos=2&initial=1~20&scale=5~10_", "_sequence:pos=3&initial=1~20&scale=5~10_", "_int:5~10_"],
     "keymethod": "arithSequence"
   },
   {
@@ -86,8 +86,8 @@
   {
     "type": "Circles",
     "id": 13,
-    "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:3~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:3~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
-    "fields": ["_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
+    "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:2~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:4~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
+    "fields": ["_int:2~18_", "_int:3~18_", "_int:4~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
     "keymethod": "pizzaAreas"
   },
   {
@@ -184,7 +184,7 @@
   {
     "type": "Complex Numbers",
     "id": 27,
-    "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) + ( _int:1~9_ - _int:2~11_i)",
+    "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) * ( _int:1~9_ - _int:2~11_i)",
     "fields": ["_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_"],
     "keymethod": "none"
   },
