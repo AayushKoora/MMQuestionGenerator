@@ -25,11 +25,14 @@ public class Question {
 
 
     public void randomizeFields() {
+        HashMap<String, String> oldFields = new HashMap<>(fields);
+        String strictmode = "null";
+
         for (String fieldName : fieldNames) {
             String type = fieldName.split("_")[1].split(":")[0];
             double lowerBound = 0;
             double upperBound = 0;
-            if (type.equals("int") || type.equals("double")) {
+            if (type.equals("int") || type.equals("double") || type.equals("scale") || type.equals("initial")) {
                 lowerBound = Double.parseDouble(fieldName.split(":")[1].split("~")[0]);
                 upperBound = Double.parseDouble(fieldName.split("~")[1].split("_")[0]);
             }
@@ -44,22 +47,24 @@ public class Question {
                     double scale = Math.pow(10, AppInterface.doubleFieldsDecimalPlaces);
                     newVal = "" + Math.round(tempVal * scale) / scale;
                 }
+                case "scale", "initial" -> {
+                    newVal = "" + random.nextInt((int) lowerBound, (int) (upperBound + 1));
+                }
                 case "sequence" -> {
-                    //_sequence:pos=1&initial=3~7&scale=2~7_
-                    int pos = Integer.parseInt(fieldName.split("=")[1].split("&")[0]);
-                    int initial;
-                    if (pos == 1) {
-                        int lowerBoundInitial = Integer.parseInt(fieldName.split("initial=")[1].split("~")[0]);
-                        int upperBoundInitial = Integer.parseInt(fieldName.split("initial=")[1].split("&")[0].split("~")[1]);
+                    //_sequence:pos=1_
+                    int pos = Integer.parseInt(fieldName.split("=")[1].split("_")[0]);
+                    int initial = -1;
+                    int scale = 0;
 
-                        initial = random.nextInt(lowerBoundInitial, upperBoundInitial + 1);
-                    } else {
-                        initial = Integer.parseInt(fields.get(fieldNames.get(0)));
+                    for (Map.Entry<String, String> entry : fields.entrySet()) {
+                        if (entry.getKey().contains("initial")) {
+                            initial = Integer.parseInt(entry.getValue());
+                        }
+                        if (entry.getKey().contains("scale")) {
+                            scale = Integer.parseInt(entry.getValue());
+                        }
                     }
-                    int scale;
-                    int lowerBoundScale = Integer.parseInt(fieldName.split("scale=")[1].split("~")[0]);
-                    int upperBoundScale = Integer.parseInt(fieldName.split("scale=")[1].split("_")[0].split("~")[1]);
-                    scale = random.nextInt(lowerBoundScale, upperBoundScale + 1);
+
                     if (pos == 1) {
                         newVal = "" + initial;
                     } else {
@@ -73,15 +78,81 @@ public class Question {
                 }
                 case "var" -> {
                     newVal = fieldName.split("=")[1].split("_")[0];
+
+                    if (fieldName.split("=")[0].split(":")[1].equals("strictanswer")) {
+                        strictmode = newVal;
+                    }
+                }
+                case "math" -> {
+                    String operation = fieldName.split("type=")[1].split("&")[0];
+                    boolean abs = false;
+                    if (operation.contains("abs_")) {
+                        operation = operation.replace("abs_", "");
+                        abs = true;
+                    }
+                    ArrayList<Double> values = new ArrayList<>();
+                    for (Map.Entry<String, String> entry : fields.entrySet()) {
+                        if (entry.getKey().contains("param:")) {
+                            values.add(Double.parseDouble(entry.getValue().split("_")[1]));
+                        }
+                    }
+
+                    double result = 0;
+
+                    switch (operation) {
+                        case "add" -> {
+                            result = values.get(0);
+                            result += values.get(1);
+                            break;
+                        }
+                        case "subtract" -> {
+                            result = values.get(0);
+                            result -= values.get(1);
+                            break;
+                        }
+                        case "multiply" -> {
+                            result = values.get(0);
+                            result *= values.get(1);
+                            break;
+                        }
+                        case "divide" -> {
+                            result = values.get(0);
+                            result /= values.get(1);
+                            break;
+                        }
+                    }
+
+                    if (abs) {
+                        result = Math.abs(result);
+                    }
+                    newVal = "" + result;
+                }
+                case "param" -> {
+                    //_param:tag=length&range=5~20_
+                    newVal = fieldName.split("tag=")[1].split("&")[0];
+                    lowerBound = Double.parseDouble(fieldName.split("range=")[1].split("~")[0]);
+                    upperBound = Double.parseDouble(fieldName.split("~")[1].split("_")[0]);
+                    newVal += "_" + random.nextInt((int) lowerBound, (int) upperBound);
                 }
             }
 
             fields.put(fieldName, newVal);
         }
 
-
-
-
+        if (!strictmode.equals("null")) {
+            boolean shouldForceRerun = false;
+            String result = solve();
+            if (result.equals("NAN") || result.equals("Infinity") || result.equals("-Infinity")) {
+                shouldForceRerun = true;
+            } else if (strictmode.equals("positive") && (Double.parseDouble(result)) <= 0) {
+                shouldForceRerun = true;
+            }
+            if (shouldForceRerun) {
+                fields = oldFields;
+                System.out.println("RandomizeFields() running recursively; strictmode condition has been met with mode: " + strictmode + " and result: " + result);
+                randomizeFields();
+            }
+        }
     }
 
 
@@ -106,6 +177,7 @@ public class Question {
             System.out.println("type: " + type);
             System.out.println("templateText: " + templateText);
             System.out.println("fields: " + fields);
+            System.out.println("fieldNames: " + fieldNames);
 
             System.out.println("ERROR MESSAGE: " + e.getMessage());
             System.out.println("ERROR CAUSE: " + e.getCause());

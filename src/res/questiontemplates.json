@@ -44,153 +44,146 @@
   {
     "type": "Linear Equations",
     "id": 7,
-  "astext": "Tom bought a total of _int:20~80_ pens and pencils. Each pen costs $_double:1.25~2.75_ and each pencil costs $_double:0.1~0.99_. He spent a total of $_double:80.0~120.0_. How many pens did he buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:target=y_", "_var:multiplechoice=3_"],
+  "astext": "Tom bought a total of _int:20~80_ pens and pencils. Each pen costs $_int:1~3_ and each pencil costs $_int:1~4_. He spent a total of $_int:80~120_. How many pens did he buy? (Truncate your answer to the next lowest integer)",
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_", "_var:strictanswer=positive_"],
     "keymethod": "linEq"
   },
   {
     "type": "Linear Equations",
     "id": 8,
-    "astext": "Sally bought a total of _int:20~80_ apples and bananas. Each apple costs $_double:1.25~2.75_ and each banana costs $_double:0.1~0.99_. She spent a total of $_double:80.0~120.0_. How many apples did she buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:target=x_", "_var:multiplechoice=3_"],
+    "astext": "Sally bought a total of _int:20~80_ apples and bananas. Each apple costs $_int:1~3_ and each banana costs $_int:1~4_. She spent a total of $_int:80~120_. How many apples did she buy? (Truncate your answer to the next lowest integer)",
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_", "_var:strictanswer=positive_"],
     "keymethod": "linEq"
   },
   {
     "type": "Sequences",
     "id": 9,
-    "astext": "Rebecca loves to read books. On Monday, she reads _sequence:pos=1&initial=1~20&scale=5~10_ pages. On Tuesday, she reads _sequence:pos=2&initial=1~20&scale=5~10_ pages. On Wednesday, she reads _sequence:pos=3&initial=1~20&scale=5~10_ pages. She continued this pattern for _int:5~10_ days. How many pages did Rebecca read in total?",
-    "fields": ["_sequence:pos=1&initial=1~20&scale=5~10_", "_sequence:pos=2&initial=1~20&scale=5~10_", "_sequence:pos=3&initial=1~20&scale=5~10_", "_int:5~10_"],
+    "astext": "Rebecca loves to read books. On Monday, she reads _sequence:pos=1_ pages. On Tuesday, she reads _sequence:pos=2_ pages. On Wednesday, she reads _sequence:pos=3_ pages. She continued this pattern for _int:5~10_ days. How many pages did Rebecca read in total?",
+    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:5~10_"],
     "keymethod": "arithSequence"
   },
   {
     "type": "Sequences",
     "id": 10,
-    "astext": "Daniel loves solving puzzles. On Monday, he solves _sequence:pos=1&initial=3~7&scale=2~7_ puzzles. On Tuesday, he solves _sequence:pos=2&initial=3~7&scale=2~7_ puzzles. On Wednesday, he solves _sequence:pos=3&initial=3~7&scale=2~7_ puzzles. He continued this pattern for _int:4~8_ days. How many puzzles did Daniel solve in total?",
-    "fields": ["_sequence:pos=1&initial=3~7&scale=2~7_", "_sequence:pos=2&initial=3~7&scale=2~7_", "_sequence:pos=3&initial=3~7&scale=2~7_", "_int:4~8_"],
+    "astext": "Daniel loves solving puzzles. On Monday, he solves _sequence:pos=1_ puzzles. On Tuesday, he solves _sequence:pos=2_ puzzles. On Wednesday, he solves _sequence:pos=3_ puzzles. He continued this pattern for _int:4~8_ days. How many puzzles did Daniel solve in total?",
+    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:4~8_"],
     "keymethod": "arithSequence"
   },
   {
     "type": "Quadratics",
     "id": 11,
-    "astext": "A rectangular garden has an area of _int:100~180_ square meters. The length of the garden is _int:3~7_ meters longer than its width. Find the dimensions of the garden.",
-    "fields": ["_var:given=length_", "_int:100~180_", "_int:3~7_", "_var:multiplechoice=3_"],
-    "keymethod": "plotDimensions"
-  },
-  {
-    "type": "Quadratics",
-    "id": 12,
-    "astext": "A rectangular plot of land has an area of _int:100~180_ square meters. The width of the plot is _int:5~9_ meters longer than its length. Find the dimensions of the plot.",
-    "fields": ["_var:given=width_", "_int:100~180_", "_int:5~9_", "_var:multiplechoice=3_"],
+    "astext": "A rectangular _string:garden,plot_ has an area of _math:type=multiply&params=length,width_ square meters. One side of the garden is _math:type=abs_subtract&params=length,width_ meters longer than the other. Find the dimensions of the _string:garden,plot_.",
+    "fields": ["_param:tag=length&range=5~20_", "_param:tag=width&range=5~20_", "_math:type=multiply&params=length,width_", "_math:type=abs_subtract&params=length,width_", "_string:garden,plot_", "_var:multiplechoice=3_"],
     "keymethod": "plotDimensions"
   },
   {
     "type": "Circles",
-    "id": 13,
-    "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:3~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:3~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
-    "fields": ["_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
+    "id": 12,
+    "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:2~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:4~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
+    "fields": ["_int:2~18_", "_int:3~18_", "_int:4~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
     "keymethod": "pizzaAreas"
   },
   {
     "type": "Circles",
-    "id": 14,
-    "astext": "A circular trampoline has a unique property: the ratio of its area to its circumference is equal to _int:4~50_. Determine the radius of the trampoline. (Assume π is 3.14, and round to the nearest tenth)",
+    "id": 13,
+    "astext": "A circular trampoline has a unique property: the ratio of its area to its circumference is equal to _int:4~50_. Determine the radius of the trampoline.",
     "fields": ["_int:4~50_", "_var:multiplechoice=5_", "_var:type=trampoline_"],
     "keymethod": "circleRatio"
   },
   {
     "type": "Circles",
-    "id": 15,
+    "id": 14,
     "astext": "The area of a circle is equal to its circumference. Determine the radius of the circle.",
     "fields": ["_var:type=equal"],
     "keymethod": "circleRatio"
   },
   {
     "type": "Right Triangles",
-    "id": 16,
+    "id": 15,
     "astext": "A triangular garden has a base of _int:10~50_ meters and a height of _int:10~70_ meters. Calculate the area of the garden.",
     "fields": ["_int:10~50_", "_int:10~70_", "_var:multiplechoice=3_"],
     "keymethod": "areaTriangle"
   },
   {
     "type": "Right Triangles",
-    "id": 17,
-    "astext": "A flagpole casts a shadow that is _int:10~20_ meters long on level ground. The angle of elevation from the tip of the shadow to the top of the flagpole is _int:45~90_ degrees. Determine the height of the flagpole.",
-    "fields": ["_int:10~20_", "_int:45~90_", "_var:multiplechoice=3_"],
+    "id": 16,
+    "astext": "A flagpole casts a shadow that is _int:10~20_ meters long on level ground. The angle of elevation from the tip of the shadow to the top of the flagpole is _int:45~90_ degrees. Determine the height of the flagpole. Answer in terms of Tan(n).",
+    "fields": ["_int:10~20_", "_int:45~90_"],
     "keymethod": "trigonometry"
   },
   {
     "type": "Right Triangles",
-    "id": 18,
-    "astext": "A ladder leaning against a wall forms a right triangle with the ground. The ladder's length is _int:10~20_ ft, and the distances from the ground to the top and bottom of the ladder are equal. What is the distance from the ground to the bottom of the ladder?",
-    "fields": ["_int:10~20_", "_var:multiplechoice=3_"],
+    "id": 17,
+    "astext": "A ladder leaning against a wall forms a right triangle with the ground. The ladder's length is _int:10~20_ ft, and the distances from the ground to the top and bottom of the ladder are equal. What is the distance from the ground to the bottom of the ladder? Answer in terms of Tan(n).",
+    "fields": ["_int:10~20_"],
     "keymethod": "trigonometry"
   },
   {
     "type": "Solid Geometry",
-    "id": 19,
-    "astext": "Calculate the surface area of a sphere with radius _int:1~10_ units.",
+    "id": 18,
+    "astext": "Calculate the surface area of a sphere with radius _int:1~10_ units. SA = 4π * r^2",
     "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=3_"],
     "keymethod": "sphere"
   },
   {
     "type": "Solid Geometry",
-    "id": 20,
-    "astext": "Find the volume of a sphere with diameter _int:1~10_ units.",
+    "id": 19,
+    "astext": "Find the volume of a sphere with diameter _int:2~10_ units. V = 4/3 * r^3 * π",
     "fields": ["_int:1~10_", "_var:type=volume_", "_var:multiplechoice=3_"],
     "keymethod": "sphere"
   },
   {
     "type": "Solid Geometry",
-    "id": 21,
-    "astext": "Determine the side length of a cube with volume _int:1~10_ cubic units.",
-    "fields": ["_int:1~10_", "_var:type=side_", "_var:multiplechoice=3_"],
+    "id": 20,
+    "astext": "Determine the side length of a cube with volume _int:1~100_ cubic units.",
+    "fields": ["_int:1~100_", "_var:type=side_", "_var:multiplechoice=3_"],
     "keymethod": "cube"
   },
   {
     "type": "Solid Geometry",
-    "id": 22,
-    "astext": "Calculate the surface area of a cube with edge length _int:1~10_ units.",
+    "id": 21,
+    "astext": "Calculate the surface area of a cube with edge length _int:1~10_ units. SA = 6l^2",
     "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=3_"],
     "keymethod": "cube"
   },
   {
     "type": "Solid Geometry",
+    "id": 22,
+    "astext": "Find the volume of a cylinder with _string:diameter,radius_ _int:4~16_ units and height _int:6~18_ units. V = π * r^2 * h",
+    "fields": ["_string:diameter,radius_","_int:4~16_", "_int:6~18_", "_var:type=volume_", "_var:multiplechoice=3_"],
+    "keymethod": "cylinder"
+  },
+  {
+    "type": "Solid Geometry",
     "id": 23,
-    "astext": "Find the volume of a cylinder with diameter _int:4~16_ units and height _int:6~18_ units.",
-    "fields": ["_int:4~16_", "_int:6~18_", "_var:type=volume_", "_var:multiplechoice=3_"],
+    "astext": "Determine the lateral surface area of a cylinder with _string:diameter,radius_ _int:2~8_ units and height _int:5~15_ units. LSA = 2πrh",
+    "fields": ["_string:diameter,radius_","_int:2~8_", "_int:5~15_", "_var:type=latsurfarea_", "_var:multiplechoice=3_"],
     "keymethod": "cylinder"
   },
   {
     "type": "Solid Geometry",
     "id": 24,
-    "astext": "Determine the lateral surface area of a cylinder with radius _int:2~8_ units and height _int:5~15_ units.",
-    "fields": ["_int:2~8_", "_int:5~15_", "_var:type=latsurfarea_", "_var:multiplechoice=3_"],
-    "keymethod": "cylinder"
-  },
-  {
-    "type": "Solid Geometry",
-    "id": 25,
-    "astext": "Find the volume of a triangular pyramid with base area _int:5~25_ square units and height _int:3~12_ units.",
+    "astext": "Find the volume of a triangular pyramid with base area _int:5~25_ square units and height _int:3~12_ units. V = b*h/3",
     "fields": ["_int:5~25_", "_int:3~12_", "_var:type=volumetripyramid_", "_var:multiplechoice=3_"],
     "keymethod": "pyramid"
   },
   {
     "type": "Solid Geometry",
-    "id": 26,
-    "astext": "Calculate the total surface area of a square pyramid with base side length _int:1~15_ units and slant height _int:5~20_ units.",
+    "id": 25,
+    "astext": "Calculate the total surface area of a square pyramid with base side length _int:1~15_ units and slant height _int:5~20_ units. SA = bSide^2 + 12 * bSide * 4 * slant height",
     "fields": ["_int:1~15_", "_int:5~20_", "_var:type=surfareasquarepyramid_", "_var:multiplechoice=3_"],
     "keymethod": "pyramid"
   },
   {
     "type": "Complex Numbers",
-    "id": 27,
-    "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) + ( _int:1~9_ - _int:2~11_i)",
+    "id": 26,
+    "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) * ( _int:1~9_ - _int:2~11_i)",
     "fields": ["_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_"],
     "keymethod": "none"
   },
   {
     "type": "Complex Numbers",
-    "id": 28,
+    "id": 27,
     "astext": "Calculate i^_int:2~10_",
     "fields": ["_int:2~10_"],
     "keymethod": "none"

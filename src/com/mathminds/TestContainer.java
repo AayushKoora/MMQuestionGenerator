@@ -69,6 +69,7 @@ public class TestContainer {
 
             Question question = new Question(id, type, templateText, fieldNames, fields, solver);
 
+
             questions.add(question);
         }
     }
