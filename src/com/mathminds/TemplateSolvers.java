@@ -126,9 +126,12 @@ public class TemplateSolvers {
     public static String trigonometry(HashMap<String, String> fields, ArrayList<String> fieldNames) {
         //"_int:10~20_", "_int:45~90_"
         double shadowLength = Double.parseDouble(fields.get(fieldNames.get(0)));
-        double angle = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double angle = 45;
+        if (fieldNames.size() > 1) {
+            angle = Double.parseDouble(fields.get(fieldNames.get(1)));
+        }
         //height = shadowLength * tan(angle)
-        return shadowLength + " * tan(" + angle + ") =" + round(shadowLength + Math.tan(Math.toRadians(angle)), AppInterface.doubleFieldsDecimalPlaces);
+        return "" + round(shadowLength + Math.tan(Math.toRadians(angle)), AppInterface.doubleFieldsDecimalPlaces);
     }
 
 /*
@@ -214,13 +217,13 @@ public class TemplateSolvers {
 
     public static String arithSequence(HashMap<String, String> fields, ArrayList<String> fieldNames) {
 
-        int val1 = Integer.parseInt(fields.get(fieldNames.get(0)));
-        int val2 = Integer.parseInt(fields.get(fieldNames.get(1)));
-        int val3 = Integer.parseInt(fields.get(fieldNames.get(2)));
+        int val1 = Integer.parseInt(fields.get(fieldNames.get(2)));
+        int val2 = Integer.parseInt(fields.get(fieldNames.get(3)));
+        int val3 = Integer.parseInt(fields.get(fieldNames.get(4)));
 
         int scale = val2 - val1;
 
-        int totalDays = Integer.parseInt(fields.get(fieldNames.get(3)));
+        int totalDays = Integer.parseInt(fields.get(fieldNames.get(5)));
 
         double sum = 0;
 
@@ -233,31 +236,9 @@ public class TemplateSolvers {
 
 
     public static String plotDimensions(HashMap<String, String> fields, ArrayList<String> fieldNames) {
-
-        //"_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:type=x_"
-        String type = fields.get(fieldNames.get(0));
-        double area = Double.parseDouble(fields.get(fieldNames.get(1)));
-        double greater = Double.parseDouble(fields.get(fieldNames.get(2)));
-        //6 + given = other
-        //other * given = 112
-        //(6 + given) * given = 112
-        //given^2 + 6*given -112 = 0
-        double b = greater;
-        double sqrt = Math.sqrt(Math.pow(b, 2) - 4 * (-1 * area));
-        double val1 = (b + sqrt) / 2;
-        double val2 = (b - sqrt) / 2;
-        double result = round(Math.max(val1, val2), AppInterface.doubleFieldsDecimalPlaces);
-
-        if (type.equals("width")) {
-            return "Length: " + (result - greater) + " | Width: " + (result);
-        } else if (type.equals("length")) {
-            return "Length: " + (result) + " | Width: " + (result - greater);
-        } else {
-            return "NO APPLICABLE TYPE VAR IN SOLVER";
-        }
-
-        //x^2 + givenNum * x - area
-        //find factors of area that add to give givenNum
+        double side1 = Double.parseDouble(fields.get(fieldNames.get(0)).split("_")[1]);
+        double side2 = Double.parseDouble(fields.get(fieldNames.get(1)).split("_")[1]);
+        return "" + side1 + " | " + side2;
     }
 
 
@@ -268,9 +249,9 @@ public class TemplateSolvers {
         String type = fields.get(fieldNames.get(1));
 
         if (type.equals("surfacearea")) {
-            return "" + round(4 * Math.PI * Math.pow(num, 2), AppInterface.doubleFieldsDecimalPlaces);
+            return "" + round(4 * Math.pow(num, 2), AppInterface.doubleFieldsDecimalPlaces) + "π";
         } else if (type.equals("volume")) {
-            return "" + round((4.0/3.0) * Math.PI * Math.pow(num/2, 3), AppInterface.doubleFieldsDecimalPlaces);
+            return "4/3 * " + round(Math.pow(num/2, 3), AppInterface.doubleFieldsDecimalPlaces) + "π";
         } else {
             return "NO APPLICABLE TYPE VAR IN SOLVER";
         }
@@ -297,16 +278,16 @@ public class TemplateSolvers {
     public static String cylinder(HashMap<String, String> fields, ArrayList<String> fieldNames) {
 
         //"_int:20~80_", "_double:1.25~2.75_", "_double:0.1~0.99_", "_double:80.0~120.0_", "_var:type=x_"
-        double num1 = Double.parseDouble(fields.get(fieldNames.get(0)));
-        double num2 = Double.parseDouble(fields.get(fieldNames.get(1)));
-        String type = fields.get(fieldNames.get(2));
+        String isDiameter = fields.get(fieldNames.get(0));
+        double num1 = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double height = Double.parseDouble(fields.get(fieldNames.get(2)));
+        String type = fields.get(fieldNames.get(3));
+        double radius = (isDiameter.equals("diameter")) ? num1 / 2 : num1;
 
-        System.out.println("type: " + type);
-
-        if (type.equals("volume")) {
-            return "" + round(Math.PI * Math.pow(num1/2, 2) * num2, AppInterface.doubleFieldsDecimalPlaces);
-        } else if (type.equals("latsurfarea")) {
-            return "" + round(2 * Math.PI * num1 * num2, AppInterface.doubleFieldsDecimalPlaces);
+        if (type.equals("volume")) { //pi * r^2 * h
+            return round(Math.pow(radius, 2) * height, AppInterface.doubleFieldsDecimalPlaces) + "π";
+        } else if (type.equals("latsurfarea")) { //2pi * r * h
+            return round(2 * radius * height, AppInterface.doubleFieldsDecimalPlaces) + "π";
         } else {
             return "NO APPLICABLE TYPE VAR IN SOLVER";
         }

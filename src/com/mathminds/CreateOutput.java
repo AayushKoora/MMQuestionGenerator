@@ -17,6 +17,7 @@ public class CreateOutput {
 
     public CreateOutput(TestContainer test) {
         this.test = test;
+
     }
 
     public void pdf() {
@@ -57,15 +58,12 @@ public class CreateOutput {
 
         output += "<h1> <br> <br> <br> <br> </h1>";
 
-        output += "<p>Following are " + test.questions.size() + " questions. Enjoy.</p>";
-
-        output += "<h1> <br> <br> <br> <br> </h1>";
-
         Random random = new Random();
 
         for (int questionCounter = 1; questionCounter <= test.questions.size(); questionCounter++) {
             Question q = test.questions.get(questionCounter - 1);
-            output += "<h2>#" + questionCounter + ": " + q.type + "</h2>";
+
+            output += "<h2>#" + questionCounter + ": </h2>";
 
             output += "<h3>" + q.withFieldsInserted() + "</h3>";
 
