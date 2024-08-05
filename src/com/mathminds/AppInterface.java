@@ -23,6 +23,10 @@ public class AppInterface {
     JPanel appPanel;
     JButton genTest;
     JTextField testNameField;
+    JRadioButton pdfOutput;
+    JRadioButton textOutput;
+    JRadioButton notecardOutput;
+    ButtonGroup selectOutputType;
 
     ArrayList<TemplateQuestion> templateQuestions;
 
@@ -99,13 +103,33 @@ public class AppInterface {
         testNameField.setToolTipText("Set resulting test name");
         appPanel.add(testNameField);
 
+        pdfOutput = new JRadioButton("PDF");
+        textOutput = new JRadioButton("Text");
+        notecardOutput = new JRadioButton("Notecard");
+        appPanel.add(pdfOutput);
+        appPanel.add(textOutput);
+        appPanel.add(notecardOutput);
+        selectOutputType = new ButtonGroup();
+        selectOutputType.add(pdfOutput);
+        selectOutputType.add(textOutput);
+        selectOutputType.add(notecardOutput);
+
+
         genTest = new JButton();
         genTest.addActionListener(e -> {
             //button that happens when you generate a test
             TestContainer test = genTest(testNameField.getText());
             CreateOutput createOutput = new CreateOutput(test);
-            createOutput.pdf();
-            System.out.println(createOutput.string());
+
+            if (pdfOutput.isSelected()) {
+                createOutput.pdf();
+            } else if (textOutput.isSelected()) {
+                createOutput.textFile();
+            } else if (notecardOutput.isSelected()) {
+                createOutput.notecardFile();
+            } else {
+                System.out.println(createOutput.string());
+            }
         });
         genTest.setText("Generate Test");
         appPanel.add(genTest);
