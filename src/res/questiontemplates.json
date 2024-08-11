@@ -128,7 +128,7 @@
   {
     "type": "Solid Geometry",
     "id": 19,
-    "astext": "Find the volume of a sphere with diameter _int:2~10_ units. V = 4/3 * r^3 * π",
+    "astext": "Find the volume of a sphere with diameter _int:1~10_ units. V = 4/3 * r^3 * π",
     "fields": ["_int:1~10_", "_var:type=volume_", "_var:multiplechoice=3_"],
     "keymethod": "sphere"
   },
@@ -178,14 +178,35 @@
     "type": "Complex Numbers",
     "id": 26,
     "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) * ( _int:1~9_ - _int:2~11_i)",
-    "fields": ["_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_"],
-    "keymethod": "none"
+    "fields": ["_var:type=simplify_", "_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_"],
+    "keymethod": "complexNumbers"
   },
   {
     "type": "Complex Numbers",
     "id": 27,
     "astext": "Calculate i^_int:2~10_",
-    "fields": ["_int:2~10_"],
-    "keymethod": "none"
+    "fields": ["_var:type=exponent_", "_int:2~10_"],
+    "keymethod": "complexNumbers"
+  },
+  {
+    "type": "Arithmetic",
+    "id": 28,
+    "astext": "A company is organizing a two-day conference. On the first day, _int:100~120_ each paid $_int:200~300_ for event-long tickets. On the second day, the number of attendees increased by _int:10~50_ compared to the first day. Each of the new attendees had to pay for their tickets. How much money did the conference make from tickets?",
+    "fields": ["_int:100~120_", "_int:200~300_", "_int:10~50_"],
+    "keymethod": "conferenceTickets"
+  },
+  {
+    "type": "Negative Numbers",
+    "id": 29,
+    "astext": "A submarine currently in the ocean is _int:10~20_ meters under the ocean. It continues to lower in altitude at  _int:2~5_ meters per second for _int:30~60_ seconds. After seeing a shark the submarine rises in altitude at _int:2~4_ meters per second for _int:20~50_ seconds. What depth is the submarine currently at?",
+    "fields": ["_int:10~20_", "_int:2~5_", "_int:30~60_", "_int:2~4_", "_int:20~50_"],
+    "keymethod": "submarineShark"
+  },
+  {
+    "type": "Right Triangles",
+    "id": 30,
+    "astext": "A right triangle has angles 30, 60, and 90 degrees. The side opposite the _string:30,60,90_ degree angle is _int:5~20_ units long. Find the sum of the lengths of the other two sides.",
+    "fields": ["_string:30,60,90_", "_int:5~20_"],
+    "keymethod": "sumCalcTriSides"
   }
 ]}

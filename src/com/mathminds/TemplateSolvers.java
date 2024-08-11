@@ -2,6 +2,7 @@ package com.mathminds;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,32 +85,44 @@ public class TemplateSolvers {
 
     public static String pizzaAreas(HashMap<String, String> fields, ArrayList<String> fieldNames) {
         //fields: "_int:3~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"
-        double inchesCount = Double.parseDouble(fields.get(fieldNames.get(0)));
-        String targetPlace = fields.get(fieldNames.get(1));
-        String order = fields.get(fieldNames.get(2));
+        double inchesCountRadius = Double.parseDouble(fields.get(fieldNames.get(0)));
+        double inchesCountDiameter = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double inchesCountCircumference = Double.parseDouble(fields.get(fieldNames.get(2)));
+        String targetPlace = fields.get(fieldNames.get(3));
+        String order = fields.get(fieldNames.get(4));
 
-        //Pizza A has inchesCount radius
-        //Pizza B has inchesCount diameter
-        //Pizza C has inchesCount circumference
+        ArrayList<Double> inches = new ArrayList<>();
 
+        inches.add(inchesCountRadius);
+        inches.add(inchesCountDiameter / 2);
+        inches.add(inchesCountCircumference / Math.PI / 2.0);
+
+        Collections.sort(inches);
+        if (order.equals("greatest to least")) {
+            Collections.reverse(inches);
+        }
+
+        double target = 0;
         switch (targetPlace) {
             case "1st": {
-                if (order.equals("least to greatest")) {
-                    return "Pizza C";
-                } else {
-                    return "Pizza A";
-                }
+                target = inches.get(0);
             }
             case "2nd": {
-                return "Pizza B";
+                target = inches.get(1);
             }
             case "3rd": {
-                if (order.equals("least to greatest")) {
-                    return "Pizza A";
-                } else {
-                    return "Pizza C";
-                }
+                target = inches.get(2);
             }
+        }
+
+        if (target == inchesCountRadius) {
+            return "Pizza A";
+        }
+        if (target == inchesCountDiameter / 2) {
+            return "Pizza B";
+        }
+        if (target == inchesCountCircumference / Math.PI / 2.0) {
+            return "Pizza C";
         }
 
         return "NO APPLICABLE TYPE VAR IN SOLVER";
@@ -313,5 +326,67 @@ public class TemplateSolvers {
         } else {
             return "NO APPLICABLE TYPE VAR IN SOLVER";
         }
+    }
+
+
+    public static String complexNumbers(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        String type = fields.get(fieldNames.get(0));
+
+        if (type.equals("simplify")) {
+            double num1 = Double.parseDouble(fields.get(fieldNames.get(1)));
+            double num2 = Double.parseDouble(fields.get(fieldNames.get(2)));
+            double num3 = Double.parseDouble(fields.get(fieldNames.get(3)));
+            double num4 = Double.parseDouble(fields.get(fieldNames.get(4)));
+            double frontNum = num1 * num3 - num2 * num4;
+            double backNum = num2 * num3 - num1 * num4;
+            return frontNum + " + " + backNum + "i";
+        }
+
+        double num = Double.parseDouble(fields.get(fieldNames.get(1)));
+
+        if (num % 4 == 0) {
+            return "1";
+        }
+        if (num % 3 == 0) {
+            return "-i";
+        }
+        if (num % 2 == 0) {
+            return "-1";
+        }
+        return "i";
+    }
+
+
+    public static String conferenceTickets(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        double num1 = Double.parseDouble(fields.get(fieldNames.get(0)));
+        double num2 = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double num3 = Double.parseDouble(fields.get(fieldNames.get(2)));
+
+        return "" + (num1 * num2 + num2 * num3);
+    }
+
+
+    public static String submarineShark(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        double initialDepth = Double.parseDouble(fields.get(fieldNames.get(0)));
+        double lowerRate = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double lowerTime = Double.parseDouble(fields.get(fieldNames.get(2)));
+        double riseRate = Double.parseDouble(fields.get(fieldNames.get(3)));
+        double riseTime = Double.parseDouble(fields.get(fieldNames.get(4)));
+
+        return "" + (initialDepth - (lowerRate * lowerTime) + (riseRate * riseTime));
+    }
+
+
+    public static String sumCalcTriSides(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        String type = fields.get(fieldNames.get(0));
+        double initialLength = Double.parseDouble(fields.get(fieldNames.get(1)));
+
+        if (type.equals("30")) {
+            return "" + ((initialLength * 2) + (initialLength * Math.sqrt(3)));
+        }
+        if (type.equals("60")) {
+            return "" + ((initialLength / Math.sqrt(3)) * 3);
+        }
+        return "" + (initialLength/2 + (initialLength/2 * Math.sqrt(3)));
     }
 }
