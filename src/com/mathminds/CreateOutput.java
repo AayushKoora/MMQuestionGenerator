@@ -221,17 +221,15 @@ public class CreateOutput {
 
         String output = "";
 
-        output += "[title:" + test.title + "]";
-        output += "[qnum:" + test.questionCount + "]";
+        output += "title:" + test.title;
+        output += "&qnum:" + test.questionCount;
 
         for (Question q : test.questions) {
-            output += "[";
             output += "question:text=" + q.withFieldsInserted() + "_answer=" + q.solve() + "_altanswers=";
             for (int i = 0; i < 5; i++) {
                 output += q.genAltAnswer() + "&";
             }
             output = output.substring(0, output.length() - 1);
-            output += "]";
         }
 
         return output;
