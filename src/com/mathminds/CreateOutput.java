@@ -226,7 +226,11 @@ public class CreateOutput {
 
         for (Question q : test.questions) {
             output += "[";
-            output += "question:type=" + q.type + "_id=" + q.templateId + "_text=" + q.withFieldsInserted() + "_answer=" + q.solve();
+            output += "question:text=" + q.withFieldsInserted() + "_answer=" + q.solve() + "_altanswers=";
+            for (int i = 0; i < 5; i++) {
+                output += q.genAltAnswer() + "&";
+            }
+            output = output.substring(0, output.length() - 1);
             output += "]";
         }
 
