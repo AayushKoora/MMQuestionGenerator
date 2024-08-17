@@ -389,4 +389,28 @@ public class TemplateSolvers {
         }
         return "" + (initialLength/2 + (initialLength/2 * Math.sqrt(3)));
     }
+
+
+    public static String lunch(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        double totalCost = Double.parseDouble(fields.get(fieldNames.get(0)));
+
+        return "" + (totalCost / 3);
+    }
+
+
+    public static String farmAnimals(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        double chickens = Double.parseDouble(fields.get(fieldNames.get(0)));
+        double horses = Double.parseDouble(fields.get(fieldNames.get(1)));
+        double chickenCost = Double.parseDouble(fields.get(fieldNames.get(2)));
+        double horseCost = Double.parseDouble(fields.get(fieldNames.get(3)));
+
+        return "" + (chickens * chickenCost + horses * horseCost);
+    }
+
+
+    public static String donutRadius(HashMap<String, String> fields, ArrayList<String> fieldNames) {
+        double radius = Double.parseDouble(fields.get(fieldNames.get(0)));
+
+        return (radius * 2) + "π";
+    }
 }

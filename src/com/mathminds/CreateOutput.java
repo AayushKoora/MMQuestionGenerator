@@ -226,10 +226,23 @@ public class CreateOutput {
 
         for (Question q : test.questions) {
             output += "question:text=" + q.withFieldsInserted() + "_answer=" + q.solve() + "_altanswers=";
-            for (int i = 0; i < 5; i++) {
-                output += q.genAltAnswer() + "&";
+            boolean multipleChoice = false;
+            int multipleChoiceCount = 0;
+            for (String fieldName : q.fieldNames) { //do multiple choice
+                if (fieldName.contains("_var:multiplechoice=")) {
+                    multipleChoice = true;
+                    multipleChoiceCount = Integer.parseInt(q.fields.get(fieldName));
+                }
             }
-            output = output.substring(0, output.length() - 1);
+            if (multipleChoice) {
+                for (int i = 0; i < multipleChoiceCount; i++) {
+                    output += q.genAltAnswer() + "&";
+                }
+                output = output.substring(0, output.length() - 1);
+            } else {
+                output += "fillintheblank";
+            }
+
         }
 
         return output;

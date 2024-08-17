@@ -3,84 +3,84 @@
     "type": "Arithmetic",
     "id": 1,
     "astext": "Mary ran _int:4~10_ miles everyday for _int:2~5_ weeks. How many miles did she run in total?",
-    "fields": ["_int:4~10_", "_int:2~5_", "_var:multiplechoice=3_"],
+    "fields": ["_int:4~10_", "_int:2~5_", "_var:multiplechoice=5_"],
     "keymethod": "runDist"
   },
   {
     "type": "Arithmetic",
     "id": 2,
     "astext": "John cycled _int:4~10_ miles every day for _int:2~5_ weeks. How many miles did he cycle in total?",
-    "fields": ["_int:4~10_", "_int:2~5_", "_var:multiplechoice=3_"],
+    "fields": ["_int:4~10_", "_int:2~5_", "_var:multiplechoice=5_"],
     "keymethod": "runDist"
   },
   {
     "type": "Negative Numbers",
     "id": 3,
     "astext": "Sarah had $_int:35~85_.00 in her bank account. She withdrew $_int:100~130_.00 and deposited $_int:1~14_.00. How much does she owe?",
-    "fields": ["_int:35~85_", "_int:100~130_", "_int:1~14_", "_var:multiplechoice=3_"],
+    "fields": ["_int:35~85_", "_int:100~130_", "_int:1~14_", "_var:multiplechoice=5_"],
     "keymethod": "bankNegative"
   },
   {
     "type": "Negative Numbers",
     "id": 4,
     "astext": "David had $_int:35~85_.00 in his bank account. He withdrew $_int:100~130_.00 and deposited $_int:5~45_.00. How much money does he have in his account now?",
-    "fields": ["_int:35~85_", "_int:100~130_", "_int:5~45_", "_var:multiplechoice=3_"],
+    "fields": ["_int:35~85_", "_int:100~130_", "_int:5~45_", "_var:multiplechoice=5_"],
     "keymethod": "bankNegative"
   },
   {
     "type": "One Step Equations",
     "id": 5,
     "astext": "Jane earned _int:2~4_X as much money as her friend Mark, plus an additional $_double:11.25~20.5_ from a side job. If Jane earned a total of $_double:130.1~168.9_, how much did Mark earn?",
-    "fields": ["_int:2~4_", "_double:11.25~20.5_", "_double:130.1~168.9_", "_var:multiplechoice=3_"],
+    "fields": ["_int:2~4_", "_double:11.25~20.5_", "_double:130.1~168.9_", "_var:multiplechoice=5_"],
     "keymethod": "moneyCompared"
   },
   {
     "type": "One Step Equations",
     "id": 6,
     "astext": "Carlos has some marbles. If he divides them equally among _int:3~6_ friends, each friend gets _int:6~18_ marbles. How many marbles does Carlos have in total?",
-    "fields": ["_int:3~6_", "_int:6~18_", "_var:multiplechoice=3_"],
+    "fields": ["_int:3~6_", "_int:6~18_", "_var:multiplechoice=5_"],
     "keymethod": "multiply"
   },
   {
     "type": "Linear Equations",
     "id": 7,
   "astext": "Tom bought a total of _int:20~80_ pens and pencils. Each pen costs $_int:1~3_ and each pencil costs $_int:1~4_. He spent a total of $_int:80~120_. How many pens did he buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_", "_var:strictanswer=positive_"],
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=5_", "_var:strictanswer=positive_"],
     "keymethod": "linEq"
   },
   {
     "type": "Linear Equations",
     "id": 8,
     "astext": "Sally bought a total of _int:20~80_ apples and bananas. Each apple costs $_int:1~3_ and each banana costs $_int:1~4_. She spent a total of $_int:80~120_. How many apples did she buy? (Truncate your answer to the next lowest integer)",
-    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=3_", "_var:strictanswer=positive_"],
+    "fields": ["_int:20~80_", "_int:1~3_", "_int:1~4_", "_int:80~120_", "_var:target=x_", "_var:multiplechoice=5_", "_var:strictanswer=positive_"],
     "keymethod": "linEq"
   },
   {
     "type": "Sequences",
     "id": 9,
     "astext": "Rebecca loves to read books. On Monday, she reads _sequence:pos=1_ pages. On Tuesday, she reads _sequence:pos=2_ pages. On Wednesday, she reads _sequence:pos=3_ pages. She continued this pattern for _int:5~10_ days. How many pages did Rebecca read in total?",
-    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:5~10_"],
+    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:5~10_", "_var:multiplechoice=5_"],
     "keymethod": "arithSequence"
   },
   {
     "type": "Sequences",
     "id": 10,
     "astext": "Daniel loves solving puzzles. On Monday, he solves _sequence:pos=1_ puzzles. On Tuesday, he solves _sequence:pos=2_ puzzles. On Wednesday, he solves _sequence:pos=3_ puzzles. He continued this pattern for _int:4~8_ days. How many puzzles did Daniel solve in total?",
-    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:4~8_"],
+    "fields": ["_scale:5~10_", "_initial:2~25_", "_sequence:pos=1_", "_sequence:pos=2_", "_sequence:pos=3_", "_int:4~8_", "_var:multiplechoice=5_"],
     "keymethod": "arithSequence"
   },
   {
     "type": "Quadratics",
     "id": 11,
     "astext": "A rectangular _string:garden,plot_ has an area of _math:type=multiply&params=length,width_ square meters. One side of the garden is _math:type=abs_subtract&params=length,width_ meters longer than the other. Find the dimensions of the _string:garden,plot_.",
-    "fields": ["_param:tag=length&range=5~20_", "_param:tag=width&range=5~20_", "_math:type=multiply&params=length,width_", "_math:type=abs_subtract&params=length,width_", "_string:garden,plot_", "_var:multiplechoice=3_"],
+    "fields": ["_param:tag=length&range=5~20_", "_param:tag=width&range=5~20_", "_math:type=multiply&params=length,width_", "_math:type=abs_subtract&params=length,width_", "_string:garden,plot_", "_var:multiplechoice=5_"],
     "keymethod": "plotDimensions"
   },
   {
     "type": "Circles",
     "id": 12,
     "astext": "The cook at a local restaurant that serves primarily pizza was wondering what sizes of pizza he should offer at his place. He conducted a survey and the top three choices came to be<br>A. a pizza with a radius of _int:2~18_ inches, <br>B. a pizza with a diameter of _int:3~18_ inches<br>C. a pizza with the circumference of _int:4~18_ inches. <br>Which pizza (A/B/C) is ranked _string:1st,2nd,3rd_ when ranked from _string:least to greatest,greatest to least_ area?",
-    "fields": ["_int:2~18_", "_int:3~18_", "_int:4~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_"],
+    "fields": ["_int:2~18_", "_int:3~18_", "_int:4~18_", "_string:1st,2nd,3rd_", "_string:least to greatest,greatest to least_", "_var:multiplechoice=3_"],
     "keymethod": "pizzaAreas"
   },
   {
@@ -101,7 +101,7 @@
     "type": "Right Triangles",
     "id": 15,
     "astext": "A triangular garden has a base of _int:10~50_ meters and a height of _int:10~70_ meters. Calculate the area of the garden.",
-    "fields": ["_int:10~50_", "_int:10~70_", "_var:multiplechoice=3_"],
+    "fields": ["_int:10~50_", "_int:10~70_", "_var:multiplechoice=5_"],
     "keymethod": "areaTriangle"
   },
   {
@@ -114,7 +114,7 @@
   {
     "type": "Right Triangles",
     "id": 17,
-    "astext": "A ladder leaning against a wall forms a right triangle with the ground. The ladder's length is _int:10~20_ ft, and the distances from the ground to the top and bottom of the ladder are equal. What is the distance from the ground to the bottom of the ladder? Answer in terms of Tan(n).",
+    "astext": "A ladder leaning against a wall forms a right triangle with the ground. The ladder's length is _int:10~20_ ft, and the distances from the ground to the top and bottom of the ladder are equal. What is the distance from the ground to the bottom of the ladder? Answer in terms of a * TrigFunc(b).",
     "fields": ["_int:10~20_"],
     "keymethod": "trigonometry"
   },
@@ -122,91 +122,112 @@
     "type": "Solid Geometry",
     "id": 18,
     "astext": "Calculate the surface area of a sphere with radius _int:1~10_ units. SA = 4π * r^2",
-    "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=3_"],
+    "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=5_"],
     "keymethod": "sphere"
   },
   {
     "type": "Solid Geometry",
     "id": 19,
     "astext": "Find the volume of a sphere with diameter _int:1~10_ units. V = 4/3 * r^3 * π",
-    "fields": ["_int:1~10_", "_var:type=volume_", "_var:multiplechoice=3_"],
+    "fields": ["_int:1~10_", "_var:type=volume_", "_var:multiplechoice=5_"],
     "keymethod": "sphere"
   },
   {
     "type": "Solid Geometry",
     "id": 20,
     "astext": "Determine the side length of a cube with volume _int:1~100_ cubic units.",
-    "fields": ["_int:1~100_", "_var:type=side_", "_var:multiplechoice=3_"],
+    "fields": ["_int:1~100_", "_var:type=side_", "_var:multiplechoice=5_"],
     "keymethod": "cube"
   },
   {
     "type": "Solid Geometry",
     "id": 21,
     "astext": "Calculate the surface area of a cube with edge length _int:1~10_ units. SA = 6l^2",
-    "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=3_"],
+    "fields": ["_int:1~10_", "_var:type=surfacearea_", "_var:multiplechoice=5_"],
     "keymethod": "cube"
   },
   {
     "type": "Solid Geometry",
     "id": 22,
     "astext": "Find the volume of a cylinder with _string:diameter,radius_ _int:4~16_ units and height _int:6~18_ units. V = π * r^2 * h",
-    "fields": ["_string:diameter,radius_","_int:4~16_", "_int:6~18_", "_var:type=volume_", "_var:multiplechoice=3_"],
+    "fields": ["_string:diameter,radius_","_int:4~16_", "_int:6~18_", "_var:type=volume_", "_var:multiplechoice=5_"],
     "keymethod": "cylinder"
   },
   {
     "type": "Solid Geometry",
     "id": 23,
     "astext": "Determine the lateral surface area of a cylinder with _string:diameter,radius_ _int:2~8_ units and height _int:5~15_ units. LSA = 2πrh",
-    "fields": ["_string:diameter,radius_","_int:2~8_", "_int:5~15_", "_var:type=latsurfarea_", "_var:multiplechoice=3_"],
+    "fields": ["_string:diameter,radius_","_int:2~8_", "_int:5~15_", "_var:type=latsurfarea_", "_var:multiplechoice=5_"],
     "keymethod": "cylinder"
   },
   {
     "type": "Solid Geometry",
     "id": 24,
     "astext": "Find the volume of a triangular pyramid with base area _int:5~25_ square units and height _int:3~12_ units. V = b*h/3",
-    "fields": ["_int:5~25_", "_int:3~12_", "_var:type=volumetripyramid_", "_var:multiplechoice=3_"],
+    "fields": ["_int:5~25_", "_int:3~12_", "_var:type=volumetripyramid_", "_var:multiplechoice=5_"],
     "keymethod": "pyramid"
   },
   {
     "type": "Solid Geometry",
     "id": 25,
     "astext": "Calculate the total surface area of a square pyramid with base side length _int:1~15_ units and slant height _int:5~20_ units. SA = bSide^2 + 12 * bSide * 4 * slant height",
-    "fields": ["_int:1~15_", "_int:5~20_", "_var:type=surfareasquarepyramid_", "_var:multiplechoice=3_"],
+    "fields": ["_int:1~15_", "_int:5~20_", "_var:type=surfareasquarepyramid_", "_var:multiplechoice=5_"],
     "keymethod": "pyramid"
   },
   {
     "type": "Complex Numbers",
     "id": 26,
     "astext": "Perform the following operations and simplify: ( _int:1~10_ + _int:2~11_i) * ( _int:1~9_ - _int:2~11_i)",
-    "fields": ["_var:type=simplify_", "_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_"],
+    "fields": ["_var:type=simplify_", "_int:1~10_", "_int:2~11_", "_int:1~9_", "_int:2~11_", "_var:multiplechoice=5_"],
     "keymethod": "complexNumbers"
   },
   {
     "type": "Complex Numbers",
     "id": 27,
     "astext": "Calculate i^_int:2~10_",
-    "fields": ["_var:type=exponent_", "_int:2~10_"],
+    "fields": ["_var:type=exponent_", "_int:2~10_", "_var:multiplechoice=3_"],
     "keymethod": "complexNumbers"
   },
   {
     "type": "Arithmetic",
     "id": 28,
     "astext": "A company is organizing a two-day conference. On the first day, _int:100~120_ each paid $_int:200~300_ for event-long tickets. On the second day, the number of attendees increased by _int:10~50_ compared to the first day. Each of the new attendees had to pay for their tickets. How much money did the conference make from tickets?",
-    "fields": ["_int:100~120_", "_int:200~300_", "_int:10~50_"],
+    "fields": ["_int:100~120_", "_int:200~300_", "_int:10~50_", "_var:multiplechoice=5_"],
     "keymethod": "conferenceTickets"
   },
   {
     "type": "Negative Numbers",
     "id": 29,
     "astext": "A submarine currently in the ocean is _int:10~20_ meters under the ocean. It continues to lower in altitude at  _int:2~5_ meters per second for _int:30~60_ seconds. After seeing a shark the submarine rises in altitude at _int:2~4_ meters per second for _int:20~50_ seconds. What depth is the submarine currently at?",
-    "fields": ["_int:10~20_", "_int:2~5_", "_int:30~60_", "_int:2~4_", "_int:20~50_"],
+    "fields": ["_int:10~20_", "_int:2~5_", "_int:30~60_", "_int:2~4_", "_int:20~50_", "_var:multiplechoice=5_"],
     "keymethod": "submarineShark"
   },
   {
     "type": "Right Triangles",
     "id": 30,
     "astext": "A right triangle has angles 30, 60, and 90 degrees. The side opposite the _string:30,60,90_ degree angle is _int:5~20_ units long. Find the sum of the lengths of the other two sides.",
-    "fields": ["_string:30,60,90_", "_int:5~20_"],
+    "fields": ["_string:30,60,90_", "_int:5~20_", "_var:multiplechoice=5_"],
     "keymethod": "sumCalcTriSides"
+  },
+  {
+    "type": "One Step Equations",
+    "id": 31,
+    "astext": "Two friends, Austin and Diego, have lunch together. They agree that Austin will pay twice as much as Diego. How much does Diego have to pay if their total was $_int:30~50_?",
+    "fields": ["_int:30~50_", "_var:multiplechoice=5_"],
+    "keymethod": "lunch"
+  },
+  {
+    "type": "One Step Equations",
+    "id": 32,
+    "astext": "John bought _int:5~10_ chickens and _int:5~15_ horses for his farm. Each chicken costs $_int:15~30_ and each horse costs $_int:500~2000_. How much did she spend in total?",
+    "fields": ["_int:5~10_", "_int:5~15_", "_int:15~30_", "_int:500~2000_", "_var:multiplechoice=5_"],
+    "keymethod": "farmAnimals"
+  },
+  {
+    "type": "Right Triangles",
+    "id": 33,
+    "astext": "The local bakery sells donuts. If the radius of one of their donuts is _int:10~30_ then what is the circumference? Leave in terms of pi",
+    "fields": ["_int:10~30_", "_var:multiplechoice=5_"],
+    "keymethod": "donutRadius"
   }
 ]}
