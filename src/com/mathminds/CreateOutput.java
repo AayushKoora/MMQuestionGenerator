@@ -235,7 +235,7 @@ public class CreateOutput {
                 }
             }
             if (multipleChoice) {
-                for (int i = 0; i < multipleChoiceCount; i++) {
+                for (int i = 0; i < multipleChoiceCount - 1; i++) {
                     output += q.genAltAnswer() + "&";
                 }
                 output = output.substring(0, output.length() - 1);
