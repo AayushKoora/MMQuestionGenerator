@@ -12,6 +12,7 @@ public class Question {
     public ArrayList<String> fieldNames;
     public HashMap<String, String> fields;
     public Method solver;
+    public boolean isTieBreaker = false;
 
 
     public Question(int id, String type, String templateText, ArrayList<String> fieldNames, HashMap<String, String> fields, Method solver) {

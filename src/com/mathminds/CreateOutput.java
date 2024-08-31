@@ -11,7 +11,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class CreateOutput {
 
@@ -65,6 +67,9 @@ public class CreateOutput {
 
         for (int questionCounter = 1; questionCounter <= test.questions.size(); questionCounter++) {
             Question q = test.questions.get(questionCounter - 1);
+            if (q.isTieBreaker) {
+                continue;
+            }
 
             output += "<h2>#" + questionCounter + ": </h2>";
 
@@ -137,6 +142,9 @@ public class CreateOutput {
 
             int questionCounter = 1;
             for (Question q : test.questions) {
+                if (q.isTieBreaker) {
+                    continue;
+                }
                 doc.newPage();
                 String asHtml = questionAsNotecardHTML(q, questionCounter);
                 HTMLWorker htmlWorker = new HTMLWorker(doc);
@@ -225,7 +233,8 @@ public class CreateOutput {
         output += "&qnum:" + test.questionCount;
 
         for (Question q : test.questions) {
-            output += "question:text=" + q.withFieldsInserted() + "_answer=" + q.solve() + "_altanswers=";
+            String answer = q.solve();
+            output += "question:text=" + q.withFieldsInserted() + "_tiebreaker=" + q.isTieBreaker + "_answer=" + answer + "_altanswers=";
             boolean multipleChoice = false;
             int multipleChoiceCount = 0;
             for (String fieldName : q.fieldNames) { //do multiple choice
@@ -235,8 +244,18 @@ public class CreateOutput {
                 }
             }
             if (multipleChoice) {
-                for (int i = 0; i < multipleChoiceCount - 1; i++) {
-                    output += q.genAltAnswer() + "&";
+                Set<String> altAnswers = new HashSet<>();
+                while (altAnswers.size() < multipleChoiceCount - 1) {
+                    System.out.println(q.withFieldsInserted());
+                    String possibleAnswer = q.genAltAnswer();
+                    if (!answer.equals(possibleAnswer)) {
+                        altAnswers.add(possibleAnswer);
+                    } else {
+                        System.out.println(possibleAnswer + " " + answer);
+                    }
+                }
+                for (String option : altAnswers) {
+                    output += option + "&";
                 }
                 output = output.substring(0, output.length() - 1);
             } else {
