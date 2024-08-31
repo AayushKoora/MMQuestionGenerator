@@ -72,6 +72,24 @@ public class TestContainer {
 
             questions.add(question);
         }
+
+        //tiebreaker
+        TemplateQuestion tiebreakerTemplate = templates.get(random.nextInt(0, templates.size()));
+
+        int id = tiebreakerTemplate.id;
+        String type = tiebreakerTemplate.type;
+        String templateText = tiebreakerTemplate.asText;
+        ArrayList<String> fieldNames = tiebreakerTemplate.fields;
+        HashMap<String, String> fields = new HashMap<>();
+        Method solver;
+        for (String key : fieldNames) {
+            fields.put(key, "");
+        }
+        TemplateSolvers accessSolvers = new TemplateSolvers();
+        solver = accessSolvers.retrieveMethod(tiebreakerTemplate.keyMethod);
+        Question question = new Question(id, type, templateText, fieldNames, fields, solver);
+        question.isTieBreaker = true;
+        questions.add(question);
     }
 
 
